@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A therapeutic walking-garden plant catalogue for Pietermaritzburg, KwaZulu-Natal — 32 plants grouped by healing benefit (scent, colour, birds, pollinators, shade), each with a photograph, recognition cue, care notes and safety guidance.">
+<meta name="author" content="Healing Garden project">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#8A9A7B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%238A9A7B'/%3E%3Cpath d='M16 25c-6-1-9-6-9-13 7 0 12 3 12 10 0-5 3-8 7-8 0 6-3 10-8 11z' fill='%23F8F9F4'/%3E%3C/svg%3E">
+<title>Healing Garden — Plant Benefit Catalogue, Polished Edition</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+  :root{
+    --ink:#22302E;
+    --ink-soft:#495751;
+    --paper:#E9EFEE;      /* cooler, water-calm off-white */
+    --card:#F5F8F7;
+    --sage:#8A9A7B;
+    --sage-line:#BFCAC4;
+    --calm:#4F7E92;       /* soft water-blue — the primary calming accent */
+    --mauve:#7E6A93;      /* calming mauve, now a secondary accent */
+    --sunbird:#C16A33;    /* warm nectar-orange, used sparingly for bird plants */
+    --warn:#9A4636;
+    --frame:#D2DAD6;
+  }
+
+  *{box-sizing:border-box;}
+  html{ -webkit-text-size-adjust:100%; }
+  @media (prefers-reduced-motion:no-preference){
+    html{ scroll-behavior:smooth; }
+  }
+  /* keep the sticky nav from covering section headings on anchor jumps */
+  [id]{ scroll-margin-top:64px; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    font-weight:400;
+    line-height:1.55;
+    font-size:16px;
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    max-width:1100px;
+    margin:0 auto;
+    padding:64px 40px 28px;
+    border-bottom:1.5px solid var(--ink);
+  }
+  .eyebrow{
+    font-family:'Spectral',serif;
+    font-style:italic;
+    color:var(--calm);
+    letter-spacing:.02em;
+    font-size:1.05rem;
+    margin:0 0 14px;
+  }
+  .masthead h1,
+  .hero-panel h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(2.4rem,6vw,4.4rem);
+    line-height:1.02;
+    letter-spacing:-.015em;
+    margin:0 0 18px;
+  }
+  .masthead h1 .em,
+  .hero-panel h1 .em{ font-style:italic; color:var(--sage); }
+  /* Break the title cleanly: "Plants that heal:" / "a walking garden" */
+  .hero-panel h1 .em{ display:block; margin-top:.06em; }
+  .lede{
+    max-width:60ch;
+    font-size:1.12rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .place{
+    margin-top:18px;
+    font-family:'Fraunces',serif;
+    font-size:.82rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--sage);
+  }
+
+  /* ---------- Hero banner (full-width photo + glass panel) ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1.5px solid var(--ink);
+    isolation:isolate;
+  }
+  .hero-img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover; object-position:center 45%;
+    z-index:0;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(180deg, rgba(34,48,46,.26), rgba(34,48,46,.46)),
+      linear-gradient(90deg, rgba(79,126,146,.18), rgba(138,154,123,.10));
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    max-width:1100px; margin:0 auto;
+    padding:72px 40px;
+    min-height:clamp(380px, 54vh, 580px);
+    display:flex; align-items:center;
+  }
+  .hero-panel{
+    max-width:660px;
+    padding:38px 40px 32px;
+    border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.58));
+    -webkit-backdrop-filter:blur(26px) saturate(180%);
+    backdrop-filter:blur(26px) saturate(180%);
+    border:1px solid rgba(255,255,255,.62);
+    box-shadow:0 34px 66px -34px rgba(35,48,42,.62), inset 0 1px 0 rgba(255,255,255,.82);
+  }
+  .hero-panel .eyebrow{ margin-bottom:12px; }
+  .hero-panel .lede{ font-size:1.06rem; }
+  @media (max-width:640px){
+    .hero-inner{ padding:44px 20px; min-height:auto; }
+    .hero-panel{ padding:26px 22px; border-radius:14px; }
+  }
+  @media print{
+    .hero{ min-height:0; overflow:visible; }
+    .hero-img,.hero::after{ display:none !important; }
+    .hero-inner{ display:block; padding:0 0 8mm; min-height:0; max-width:none; }
+    .hero-panel{
+      background:none; -webkit-backdrop-filter:none; backdrop-filter:none;
+      box-shadow:none; border:none; border-radius:0; padding:0; max-width:none;
+    }
+  }
+
+  /* ---------- Legend ---------- */
+  .legend{
+    max-width:1100px;
+    margin:0 auto;
+    padding:22px 40px 8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 10px;
+    align-items:center;
+  }
+  .legend .legend-label{
+    font-family:'Fraunces',serif;
+    font-size:.78rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-right:6px;
+  }
+
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-family:'Fraunces',serif;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    padding:3px 9px 4px;
+    border-radius:999px;
+    border:1px solid var(--sage-line);
+    color:var(--ink-soft);
+    background:rgba(255,255,255,.4);
+    white-space:nowrap;
+  }
+  .tag::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--sage);
+    flex:0 0 auto;
+  }
+  .tag.scent::before{background:#9AA86F;}
+  .tag.colour::before{background:var(--mauve);}
+  .tag.movement::before{background:#6FA39A;}
+  .tag.birds::before{background:var(--sunbird);}
+  .tag.butterfly::before{background:#C7912F;}
+  .tag.touch::before{background:#A98C6B;}
+  .tag.taste::before{background:#7C9A4E;}
+  .tag.medicinal::before{background:#5C7CA0;}
+  .tag.shade::before{background:#4F6B52;}
+
+  /* ---------- Filter controls ---------- */
+  button.tag{
+    cursor:pointer;
+    line-height:1.2;
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  .tag[aria-pressed="true"]{
+    background:var(--mauve);
+    border-color:var(--mauve);
+    color:#fff;
+  }
+  .tag[aria-pressed="true"]::before{ background:#fff; }
+  .tag:focus-visible{ outline:2px solid var(--mauve); outline-offset:2px; }
+  .filter-reset{
+    font-family:'Fraunces',serif;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    cursor:pointer;
+    border:1px solid var(--mauve);
+    color:var(--mauve);
+    background:rgba(255,255,255,.5);
+    border-radius:999px;
+    padding:3px 11px 4px;
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  .filter-reset:hover,
+  .filter-reset:focus-visible{ background:var(--mauve); color:#fff; outline:none; }
+  .filter-status{
+    font-size:.82rem;
+    font-style:italic;
+    color:var(--ink-soft);
+  }
+  .filter-hint{
+    max-width:1100px;
+    margin:0 auto;
+    padding:2px 40px 0;
+    font-size:.8rem;
+    color:var(--sage);
+    font-style:italic;
+  }
+  .filtered-out{ display:none !important; }
+
+  /* ---------- Toolbar: search + print ---------- */
+  .toolbar{
+    max-width:1100px;
+    margin:0 auto;
+    padding:16px 40px 0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+  }
+  .search-wrap{ position:relative; flex:1 1 260px; }
+  .search-input{
+    width:100%;
+    font-family:'Spectral',Georgia,serif;
+    font-size:.98rem;
+    color:var(--ink);
+    padding:9px 15px;
+    border:1px solid var(--sage-line);
+    border-radius:999px;
+    background:rgba(255,255,255,.55);
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  .search-input::placeholder{ color:var(--sage); font-style:italic; }
+  .search-input:focus-visible{ outline:2px solid var(--calm); outline-offset:1px; border-color:var(--calm); }
+  .print-btn{
+    font-family:'Fraunces',serif;
+    font-size:.8rem;
+    letter-spacing:.03em;
+    cursor:pointer;
+    color:#fff;
+    background:var(--sage);
+    border:1px solid var(--sage);
+    border-radius:999px;
+    padding:9px 17px;
+    -webkit-appearance:none;
+    appearance:none;
+    white-space:nowrap;
+  }
+  .print-btn:hover,
+  .print-btn:focus-visible{ background:var(--ink); border-color:var(--ink); outline:none; }
+  .no-results{
+    max-width:1100px;
+    margin:0 auto;
+    padding:10px 40px 0;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+  .care-swipe-hint{
+    display:none;
+    margin:10px 0 0;
+    font-size:.82rem;
+    font-style:italic;
+    color:var(--sage);
+  }
+  @media (max-width:760px){
+    .care-swipe-hint{ display:block; }
+  }
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+  }
+
+  /* ---------- Sections ---------- */
+  main{ max-width:1100px; margin:0 auto; padding:8px 40px 40px; }
+  .section{ margin-top:46px; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    border-bottom:1px solid var(--sage-line);
+    padding-bottom:10px;
+    margin-bottom:26px;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:1.7rem;
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  .section-head .count{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    color:var(--mauve);
+    font-size:1rem;
+  }
+  .section-head p{
+    margin:0 0 0 auto;
+    max-width:42ch;
+    font-size:.95rem;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+
+  /* ---------- Grid + cards ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(265px,1fr));
+    gap:22px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--frame);
+    border-radius:3px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 1px 0 rgba(35,48,42,.04);
+  }
+
+  /* image frame / placeholder */
+  .plate{
+    position:relative;
+    aspect-ratio:4/3;
+    background:
+      repeating-linear-gradient(45deg,rgba(138,154,123,.06) 0 10px,transparent 10px 20px),
+      #EFF2E8;
+    border-bottom:1px solid var(--frame);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .plate img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .plate .photo-link{
+    display:block;
+    width:100%;
+    height:100%;
+    color:inherit;
+  }
+  .plate .photo-link:focus-visible{
+    outline:3px solid var(--mauve);
+    outline-offset:-3px;
+  }
+  .plate .ph{
+    padding:14px;
+    color:var(--sage);
+  }
+  .plate .ph .leaf{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    display:block;
+    margin-bottom:6px;
+    opacity:.7;
+  }
+  .plate .ph .phname{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:.86rem;
+    color:var(--ink-soft);
+  }
+  .plate .ph .phnote{
+    font-size:.7rem;
+    letter-spacing:.04em;
+    color:var(--sage);
+    margin-top:4px;
+  }
+
+  .card-body{ padding:16px 17px 18px; display:flex; flex-direction:column; gap:9px; flex:1; }
+  .common{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:1.18rem;
+    line-height:1.12;
+    margin:0;
+  }
+  .botanical{
+    font-style:italic;
+    color:var(--mauve);
+    font-size:.92rem;
+    margin:-4px 0 0;
+  }
+  .zulu{ font-size:.8rem; color:var(--sage); margin:-3px 0 0; letter-spacing:.02em; }
+  .benefit{ font-size:.95rem; color:var(--ink-soft); margin:2px 0 0; }
+  .card-tags{ display:flex; flex-wrap:wrap; gap:5px; margin-top:auto; padding-top:6px; }
+  .card-tags .tag{ font-size:.66rem; padding:2px 7px 3px; }
+
+  /* avoid cards */
+  .section.avoid .section-head{ border-color:rgba(154,70,54,.4); }
+  .section.avoid .section-head h2{ color:var(--warn); }
+  .card.danger{ border-color:rgba(154,70,54,.45); background:#F8F1EF; }
+  .card.danger .plate{ background:#F0E2DE; border-color:rgba(154,70,54,.3); }
+  .card.danger .botanical{ color:var(--warn); }
+  .card.danger .skull{
+    position:absolute; top:10px; right:10px;
+    font-family:'Fraunces',serif; font-size:.66rem; letter-spacing:.12em;
+    text-transform:uppercase; color:#fff; background:var(--warn);
+    padding:3px 8px; border-radius:999px; z-index:2;
+  }
+
+  /* ---------- How-to + footer ---------- */
+  .note{
+    max-width:1100px; margin:46px auto 0; padding:22px 40px;
+  }
+  .note .box{
+    border:1px dashed var(--sage);
+    border-radius:4px;
+    padding:18px 22px;
+    background:rgba(255,255,255,.4);
+  }
+  .note h3{ font-family:'Fraunces',serif; font-weight:500; margin:0 0 8px; font-size:1.1rem;}
+  .note p{ margin:0 0 8px; font-size:.95rem; color:var(--ink-soft);}
+  .note p:last-child{ margin-bottom:0; }
+
+  footer{
+    max-width:1100px; margin:30px auto 0; padding:20px 40px 60px;
+    border-top:1px solid var(--sage-line);
+    font-size:.82rem; color:var(--sage);
+  }
+  footer .disc{ font-style:italic; }
+
+
+  /* ---------- Navigation + professional polish ---------- */
+  .quick-nav{
+    position:sticky;
+    top:0;
+    z-index:5;
+    max-width:1100px;
+    margin:0 auto;
+    padding:12px 40px 10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    background:rgba(234,238,227,.94);
+    border-bottom:1px solid rgba(194,203,182,.8);
+    backdrop-filter:blur(8px);
+  }
+  .quick-nav a{
+    font-family:'Fraunces',serif;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border:1px solid var(--sage-line);
+    border-radius:999px;
+    padding:5px 11px 6px;
+    background:rgba(255,255,255,.38);
+  }
+  .quick-nav a:hover,
+  .quick-nav a:focus-visible{
+    color:var(--ink);
+    border-color:var(--calm);
+    outline:none;
+  }
+  .spotter{
+    margin:0;
+    padding:8px 10px;
+    border-left:3px solid var(--sage-line);
+    background:rgba(234,238,227,.55);
+    color:var(--ink-soft);
+    font-size:.88rem;
+    line-height:1.36;
+  }
+  .spotter span{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .card{
+    min-height:100%;
+  }
+  .card.danger .spotter{
+    border-left-color:rgba(154,70,54,.52);
+    background:rgba(154,70,54,.07);
+  }
+  .photo-credits .box{
+    border-style:solid;
+  }
+  .credits-list{
+    margin:14px 0 0;
+    padding-left:22px;
+    columns:2 320px;
+    column-gap:34px;
+  }
+  .credits-list li{
+    break-inside:avoid;
+    margin:0 0 9px;
+    color:var(--ink-soft);
+    font-size:.84rem;
+    line-height:1.35;
+  }
+  .credits-list a{
+    color:var(--ink);
+    text-decoration-thickness:1px;
+    text-underline-offset:2px;
+  }
+  .credit-plant{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+  }
+  .credit-file{
+    display:block;
+    font-style:italic;
+    color:var(--sage);
+  }
+
+  /* Gentle crop tuning for tall or close-up source images. */
+  .plate img[src$="nerium-oleander.jpg"]{ object-position:center 30%; }
+  .plate img[src$="brugmansia-datura.jpg"]{ object-position:center 38%; }
+  .plate img[src$="eriocephalus-africanus.jpg"]{ object-position:center 44%; }
+  .plate img[src$="barleria-obtusa.jpg"]{ object-position:center 42%; }
+  .plate img[src$="agapanthus-praecox.jpg"]{ object-position:center 40%; }
+  .plate img[src$="buddleja-salviifolia.jpg"]{ object-position:center 42%; }
+  .plate img[src$="pelargonium-tomentosum.jpg"]{ object-position:center 44%; }
+
+  /* ---------- Care notes ---------- */
+  .care{
+    margin:0;
+    padding:8px 10px;
+    border-left:3px solid rgba(79,107,82,.55);
+    background:rgba(248,249,244,.78);
+    color:var(--ink-soft);
+    font-size:.88rem;
+    line-height:1.36;
+  }
+  .care span{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .card.danger .care{
+    border-left-color:rgba(154,70,54,.58);
+    background:rgba(154,70,54,.08);
+  }
+  .care-guide .box{
+    border-style:solid;
+  }
+  .care-rule{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+    margin:14px 0 16px;
+  }
+  .care-rule p{
+    margin:0;
+    padding:12px 13px;
+    border:1px solid var(--sage-line);
+    background:rgba(255,255,255,.36);
+  }
+  .care-rule strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    color:var(--ink);
+    margin-bottom:3px;
+  }
+  .care-table-wrap{
+    overflow-x:auto;
+    margin-top:12px;
+  }
+  .care-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:860px;
+    font-size:.82rem;
+    line-height:1.32;
+  }
+  .care-table th,
+  .care-table td{
+    padding:9px 10px;
+    border-bottom:1px solid rgba(194,203,182,.78);
+    vertical-align:top;
+    text-align:left;
+  }
+  .care-table th{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    color:var(--ink);
+    background:rgba(255,255,255,.42);
+  }
+  .care-table td:first-child{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  .care-sources{
+    margin-top:12px;
+    font-size:.8rem;
+    color:var(--sage);
+  }
+  .care-sources a{
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Suggested combinations ---------- */
+  .garden-combinations .box{
+    border-style:solid;
+  }
+  .combo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+    margin-top:16px;
+  }
+  .combo-card{
+    border:1px solid var(--frame);
+    background:var(--card);
+    border-radius:4px;
+    overflow:hidden;
+    break-inside:avoid;
+  }
+  .combo-card img{
+    display:block;
+    width:100%;
+    aspect-ratio:3/2;
+    object-fit:cover;
+    border-bottom:1px solid var(--frame);
+  }
+  .combo-body{
+    padding:14px 15px 16px;
+  }
+  .combo-body h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    margin:0 0 6px;
+    font-size:1.03rem;
+  }
+  .combo-body p{
+    margin:0 0 8px;
+  }
+  .combo-body ul{
+    margin:0;
+    padding-left:18px;
+    color:var(--ink-soft);
+    font-size:.9rem;
+    line-height:1.4;
+  }
+  .combo-note{
+    font-style:italic;
+    color:var(--sage);
+  }
+
+  /* ---------- Refined visuals ---------- */
+  body{
+    background:
+      radial-gradient(1000px 560px at 85% -4%, rgba(79,126,146,.12), transparent 60%),
+      radial-gradient(900px 520px at -6% 6%, rgba(138,154,123,.11), transparent 58%),
+      radial-gradient(760px 520px at 50% 118%, rgba(79,126,146,.07), transparent 62%),
+      var(--paper);
+    background-repeat:no-repeat;
+  }
+
+  /* Cards: softer corners, layered shadow, tactile hover + image zoom */
+  .card{
+    border-radius:7px;
+    box-shadow:0 1px 2px rgba(35,48,42,.05), 0 18px 30px -26px rgba(35,48,42,.62);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 18px rgba(35,48,42,.09), 0 30px 48px -30px rgba(35,48,42,.7);
+    border-color:var(--sage-line);
+  }
+  .plate{ overflow:hidden; }
+  .plate::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:42%;
+    background:linear-gradient(to top, rgba(35,48,42,.15), transparent);
+    pointer-events:none;
+  }
+  .plate img{ transition:transform .7s cubic-bezier(.2,.7,.2,1); }
+  .card:hover .plate img{ transform:scale(1.06); }
+
+  /* Decorative botanical mark on section titles */
+  .section-head h2::before{
+    content:"\2767";
+    margin-right:.5rem;
+    color:currentColor;
+    opacity:.32;
+    font-size:.82em;
+    vertical-align:.04em;
+  }
+
+  /* Combination boards get the same gentle lift */
+  .combo-card{ transition:transform .35s ease, box-shadow .35s ease; }
+  .combo-card:hover{ transform:translateY(-4px); box-shadow:0 22px 40px -28px rgba(35,48,42,.68); }
+  .combo-card img{ transition:transform .7s cubic-bezier(.2,.7,.2,1); }
+  .combo-card:hover img{ transform:scale(1.05); }
+
+  /* Smooth micro-interactions on controls */
+  .quick-nav a{ transition:color .2s ease, border-color .2s ease, background .2s ease; }
+  .tag{ transition:background .2s ease, border-color .2s ease, color .2s ease; }
+  .print-btn,.filter-reset,.search-input{ transition:background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease; }
+  .search-input:focus-visible{ box-shadow:0 0 0 4px rgba(79,126,146,.15); }
+
+  /* Scroll-reveal (applied only by JS when motion is allowed) */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-visible{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion:reduce){
+    .card,.card .plate img,.combo-card,.combo-card img{ transition:none; }
+    .card:hover,.combo-card:hover{ transform:none; }
+  }
+
+  /* ---------- Liquid glass (frosted translucent surfaces) ---------- */
+  .quick-nav{
+    background:linear-gradient(180deg, rgba(255,255,255,.60), rgba(255,255,255,.34));
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:1px solid rgba(255,255,255,.55);
+    box-shadow:0 10px 30px -18px rgba(35,48,42,.5), inset 0 1px 0 rgba(255,255,255,.75);
+  }
+  .quick-nav a{
+    background:rgba(255,255,255,.42);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .search-input{
+    background:linear-gradient(180deg, rgba(255,255,255,.60), rgba(255,255,255,.38));
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    backdrop-filter:blur(16px) saturate(160%);
+    border-color:rgba(255,255,255,.6);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 6px 18px -14px rgba(35,48,42,.5);
+  }
+  .legend .tag{
+    background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.30));
+    -webkit-backdrop-filter:blur(10px) saturate(150%);
+    backdrop-filter:blur(10px) saturate(150%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .filter-reset{
+    -webkit-backdrop-filter:blur(10px) saturate(150%);
+    backdrop-filter:blur(10px) saturate(150%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .print-btn{
+    background:linear-gradient(180deg, #97a788, var(--sage));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 8px 20px -12px rgba(35,48,42,.6);
+  }
+  /* Frosted plant cards — the photo stays crisp; the text panel becomes glass */
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(248,249,244,.36));
+    -webkit-backdrop-filter:blur(16px) saturate(150%);
+    backdrop-filter:blur(16px) saturate(150%);
+  }
+  .card.danger{
+    background:linear-gradient(180deg, rgba(250,242,240,.62), rgba(247,239,237,.42));
+  }
+  /* Soft glass sheen over the masthead */
+  .masthead{
+    background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 72%);
+  }
+  .note .box,
+  .combo-card{
+    background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(248,249,244,.38));
+    -webkit-backdrop-filter:blur(18px) saturate(150%);
+    backdrop-filter:blur(18px) saturate(150%);
+    border:1px solid rgba(255,255,255,.5);
+    box-shadow:0 20px 44px -28px rgba(35,48,42,.55), inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  /* Fallback for browsers without backdrop-filter: keep surfaces readable. */
+  @supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+    .quick-nav{ background:rgba(240,243,235,.97); }
+    .note .box,.combo-card,.card{ background:rgba(248,249,244,.97); }
+    .card.danger{ background:rgba(248,241,239,.97); }
+    .search-input,.legend .tag,.quick-nav a{ background:rgba(255,255,255,.92); }
+  }
+
+  /* ---------- Plant selection + shopping list ---------- */
+  .select-toggle{
+    position:absolute; top:10px; left:10px; z-index:3;
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'Fraunces',serif; font-size:.66rem; letter-spacing:.03em;
+    color:var(--ink); cursor:pointer; -webkit-user-select:none; user-select:none;
+    background:rgba(255,255,255,.82);
+    border:1px solid rgba(255,255,255,.7); border-radius:999px;
+    padding:4px 10px 4px 7px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 4px 12px -8px rgba(35,48,42,.55);
+  }
+  .select-toggle input{ width:14px; height:14px; margin:0; cursor:pointer; accent-color:var(--mauve); }
+  .card.selected{ outline:2px solid var(--mauve); outline-offset:2px; }
+  .card.selected .select-toggle{ background:var(--mauve); color:#fff; border-color:var(--mauve); }
+  .card.danger.selected{ outline-color:var(--warn); }
+  .card.danger.selected .select-toggle{ background:var(--warn); border-color:var(--warn); }
+
+  .section-select{
+    align-self:center;
+    font-family:'Fraunces',serif; font-size:.7rem; letter-spacing:.03em;
+    cursor:pointer; color:var(--mauve);
+    background:rgba(255,255,255,.5); border:1px solid var(--sage-line);
+    border-radius:999px; padding:4px 12px; white-space:nowrap;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .section-select:hover,.section-select:focus-visible{ background:var(--mauve); color:#fff; border-color:var(--mauve); outline:none; }
+  .avoid .section-select{ color:var(--warn); }
+  .avoid .section-select:hover,.avoid .section-select:focus-visible{ background:var(--warn); border-color:var(--warn); color:#fff; }
+
+  .select-dock{
+    position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
+    z-index:30; display:flex; align-items:center; gap:12px;
+    padding:9px 12px 9px 18px; border-radius:999px;
+    background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.4));
+    -webkit-backdrop-filter:blur(20px) saturate(180%); backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,.6);
+    box-shadow:0 18px 40px -16px rgba(35,48,42,.5), inset 0 1px 0 rgba(255,255,255,.75);
+  }
+  .select-dock[hidden]{ display:none; }
+  .sd-count{ font-family:'Fraunces',serif; font-size:.9rem; color:var(--ink); white-space:nowrap; }
+  .sd-count strong{ font-weight:600; }
+  .sd-print,.sd-clear{ font-family:'Fraunces',serif; font-size:.78rem; cursor:pointer; border-radius:999px; padding:8px 15px; white-space:nowrap; }
+  .sd-print{ color:#fff; background:linear-gradient(180deg,#9a86ad,var(--mauve)); border:1px solid var(--mauve); box-shadow:inset 0 1px 0 rgba(255,255,255,.3); }
+  .sd-print:hover,.sd-print:focus-visible{ background:var(--mauve); outline:none; }
+  .sd-clear{ color:var(--ink-soft); background:transparent; border:1px solid var(--sage-line); }
+  .sd-clear:hover,.sd-clear:focus-visible{ color:var(--ink); border-color:var(--mauve); outline:none; }
+  @media (max-width:560px){
+    .select-dock{ left:12px; right:12px; bottom:12px; transform:none; justify-content:center; flex-wrap:wrap; gap:8px; padding:10px 12px; }
+  }
+
+  /* Shopping list — hidden on screen, shown only when printing a selection */
+  #shopping-list{ display:none; }
+  .sl-head h2{ font-family:'Fraunces',serif; font-weight:500; font-size:1.6rem; margin:0 0 4px; }
+  .sl-meta{ font-size:.85rem; color:#555; margin:0 0 4px; }
+  .sl-intro{ font-size:.85rem; color:#555; margin:0 0 12px; font-style:italic; }
+  .sl-group{ font-family:'Fraunces',serif; font-weight:500; font-size:1.02rem; margin:14px 0 4px; padding-bottom:3px; border-bottom:1px solid #23302A; }
+  .sl-list{ list-style:none; margin:0 0 8px; padding:0; }
+  .sl-item{ display:flex; align-items:center; gap:11px; padding:7px 0; border-bottom:1px solid #cbd3bf; break-inside:avoid; }
+  .sl-qty{ flex:0 0 auto; border:1px solid #23302A; border-radius:3px; padding:3px 7px; font-family:'Fraunces',serif; font-size:.66rem; letter-spacing:.02em; }
+  .sl-thumb{ flex:0 0 auto; width:54px; height:42px; object-fit:cover; border-radius:3px; border:1px solid #cbd3bf; }
+  .sl-text{ display:flex; flex-direction:column; }
+  .sl-text strong{ font-family:'Fraunces',serif; font-weight:500; }
+  .sl-text em{ color:#6a6a6a; font-size:.9em; }
+  .sl-look{ font-size:.78rem; color:#555; margin-top:2px; }
+
+  /* ---------- Print ---------- */
+  @page{
+    size:A4;
+    margin:12mm;
+  }
+  @media print{
+    body{ background:#fff; font-size:10.2pt; line-height:1.42; }
+    .masthead,.legend,main,.note,footer{ max-width:none; padding-left:0; padding-right:0; }
+    .masthead{ padding-top:0; padding-bottom:8mm; }
+    /* Section nav becomes a clickable Contents bar in the PDF */
+    .quick-nav{
+      display:flex; position:static; gap:6px;
+      background:none; box-shadow:none;
+      -webkit-backdrop-filter:none; backdrop-filter:none;
+      border-bottom:1px solid var(--sage-line);
+      padding:0 0 5mm; margin-bottom:6mm;
+    }
+    .quick-nav::before{
+      content:"Contents"; font-family:'Fraunces',serif; font-size:8.5pt;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft);
+      align-self:center; margin-right:6px;
+    }
+    .quick-nav a{
+      background:none; -webkit-backdrop-filter:none; backdrop-filter:none;
+      border:1px solid var(--sage-line); color:var(--ink);
+    }
+    .legend{ padding-top:6mm; padding-bottom:2mm; }
+    main{ padding-top:0; padding-bottom:0; }
+    .section{ margin-top:10mm; break-inside:auto; }
+    .section-head{ margin-bottom:5mm; break-after:avoid; break-inside:avoid; }
+    .section-head p{ max-width:46ch; }
+    .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:5mm; }
+    .card{ break-inside:avoid; box-shadow:none; background:#fff; }
+    .plate{ background:#f2f4ec; }
+    .spotter,.care{ background:#f7f8f2; }
+    .care-rule{ grid-template-columns:1fr; gap:3mm; }
+    .combo-grid{ grid-template-columns:1fr; gap:5mm; }
+    .care-table{ min-width:0; font-size:7.8pt; }
+    .care-table th,.care-table td{ padding:5px 6px; }
+    .note{ margin-top:10mm; padding-top:0; padding-bottom:0; }
+    .note .box{ background:none; }
+    .credits-list{ columns:2; }
+    a{ color:inherit; text-decoration:none; }
+    /* Always print the complete catalogue, ignoring any on-screen filter. */
+    .card.filtered-out{ display:flex !important; }
+    .section.filtered-out{ display:block !important; }
+    .filter-reset,.filter-status,.filter-hint{ display:none !important; }
+    .toolbar,.no-results,.care-swipe-hint{ display:none !important; }
+    .reveal{ opacity:1 !important; transform:none !important; }
+    .plate::after{ display:none; }
+    .card,.combo-card{ transform:none !important; box-shadow:none; }
+    .note .box,.combo-card,.search-input,.legend .tag,.card{ -webkit-backdrop-filter:none; backdrop-filter:none; }
+    .note .box,.combo-card{ background:#fff; }
+    .masthead{ background:none; }
+    .tag[aria-pressed="true"]{ background:rgba(255,255,255,.4); border-color:var(--sage-line); color:var(--ink-soft); }
+    .tag[aria-pressed="true"]::before{ background:var(--sage); }
+    /* selection controls never print */
+    .select-dock,.select-toggle,.section-select{ display:none !important; }
+    /* ---- Tidy pagination ---- */
+    p{ orphans:3; widows:3; }
+    .card,.combo-card{ break-inside:avoid; }
+    .care-table thead{ display:table-header-group; }
+    .care-table tr{ break-inside:avoid; }
+    .care-rule p{ break-inside:avoid; }
+    /* Give the big reference sections a clean start on a fresh page */
+    #care-guide,#garden-combinations,#photo-credits{ break-before:page; }
+    #care-guide .box,#garden-combinations .box,#photo-credits .box{ break-inside:auto; }
+  }
+  /* Print ONLY the chosen plants as a shopping list. */
+  @media print{
+    body.printing-list > *:not(#shopping-list){ display:none !important; }
+    body.printing-list #shopping-list{ display:block !important; }
+    body.printing-list{ background:#fff; }
+  }
+  @media (max-width:560px){
+    .masthead,.legend,main,.note,footer{ padding-left:22px; padding-right:22px; }
+    .quick-nav{ position:static; padding-left:22px; padding-right:22px; }
+    .quick-nav a{ flex:1 1 auto; text-align:center; }
+    .credits-list{ columns:1; }
+    .care-rule{ grid-template-columns:1fr; }
+    .care-table{ min-width:720px; }
+    .combo-grid{ grid-template-columns:1fr; }
+    .section-head{ flex-wrap:wrap; }
+    .section-head p{ margin:6px 0 0; text-align:left; max-width:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="hero-img" src="healing_garden_images/aloe-arborescens.jpg" alt="" aria-hidden="true" decoding="async">
+  <div class="hero-inner">
+    <div class="hero-panel">
+      <p class="eyebrow">A therapeutic walking garden · plant benefit catalogue</p>
+      <h1>Plants that heal: <span class="em">a walking garden</span></h1>
+      <p class="lede">Every plant in this garden earns its place twice over — once for the calming, sensory experience it gives the people who walk past it, and again for the deep medicinal and cultural heritage many of them carry. This catalogue pairs each species with a photograph, a recognition cue and a short note on its healing value.</p>
+      <p class="place">Pietermaritzburg · KwaZulu-Natal Midlands · 32 plants across seven garden uses</p>
+    </div>
+  </div>
+</header>
+
+<nav class="quick-nav" aria-label="Catalogue sections">
+  <a href="#aromatic">Aromatic</a>
+  <a href="#medicinal">Medicinal</a>
+  <a href="#birds">Birds</a>
+  <a href="#pollinators">Pollinators</a>
+  <a href="#visual">Calming visual</a>
+  <a href="#shade">Shade</a>
+  <a href="#avoid">Keep out</a>
+  <a href="#care-guide">Care guide</a>
+  <a href="#garden-combinations">Combinations</a>
+  <a href="#photo-credits">Credits</a>
+</nav>
+
+<section class="toolbar" aria-label="Search and print">
+  <div class="search-wrap">
+    <label class="visually-hidden" for="plant-search">Find a plant by name</label>
+    <input type="search" id="plant-search" class="search-input" placeholder="Find a plant by name — e.g. lavender, aloe…" autocomplete="off">
+  </div>
+  <button type="button" class="print-btn" id="print-btn">Print / Save as PDF</button>
+</section>
+
+<section class="legend" aria-label="Filter plants by benefit">
+  <span class="legend-label">Filter by benefit</span>
+  <button type="button" class="tag scent" data-filter="scent" aria-pressed="false">Scent / aromatherapy</button>
+  <button type="button" class="tag colour" data-filter="colour" aria-pressed="false">Calming colour</button>
+  <button type="button" class="tag movement" data-filter="movement" aria-pressed="false">Movement &amp; sound</button>
+  <button type="button" class="tag touch" data-filter="touch" aria-pressed="false">Touch</button>
+  <button type="button" class="tag taste" data-filter="taste" aria-pressed="false">Labelled edible part</button>
+  <button type="button" class="tag birds" data-filter="birds" aria-pressed="false">Attracts birds</button>
+  <button type="button" class="tag butterfly" data-filter="butterfly" aria-pressed="false">Attracts butterflies</button>
+  <button type="button" class="tag medicinal" data-filter="medicinal" aria-pressed="false">Medicinal heritage</button>
+  <button type="button" class="tag shade" data-filter="shade" aria-pressed="false">Shade / shelter</button>
+  <button type="button" class="filter-reset" id="filter-reset" hidden>Show all</button>
+  <span class="filter-status" id="filter-status" role="status" aria-live="polite"></span>
+</section>
+<p class="filter-hint">Tap one or more benefits to show only the plants that offer them. Tap again to clear, or use “Show all”.</p>
+<p class="no-results" id="no-results" role="status" aria-live="polite" hidden>No plants match that search. Try a different name, or use “Show all” to reset.</p>
+
+<main>
+
+  <!-- AROMATIC & SENSORY -->
+  <section class="section" id="aromatic">
+    <div class="section-head">
+      <h2>Aromatic &amp; sensory</h2>
+      <span class="count">eleven plants</span>
+      <p>Scent, texture, flavour and colour within arm's reach of the path — the most direct route to calm.</p>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Pelargonium_tomentosum_05.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/pelargonium-tomentosum.jpg" alt="Peppermint pelargonium (Pelargonium tomentosum)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Pelargonium tomentosum</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Peppermint pelargonium</h3>
+          <p class="botanical">Pelargonium tomentosum</p>
+          <p class="spotter"><span>Look for:</span> soft, fuzzy leaves with a peppermint scent when gently touched.</p>
+          <p class="care"><span>Care:</span> Semi-shade, moist but well-drained soil; water at soil level and trim leggy stems.</p>
+          <p class="benefit">Soft, velvety leaves release a cool peppermint scent on touch — an invitation to slow down and engage the senses.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag touch">Touch</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:African_Rosemary.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/eriocephalus-africanus.jpg" alt="Wild rosemary (Eriocephalus africanus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Eriocephalus africanus</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Wild rosemary</h3>
+          <p class="botanical">Eriocephalus africanus</p>
+          <p class="spotter"><span>Look for:</span> silvery, fine foliage and small white flower heads.</p>
+          <p class="care"><span>Care:</span> Full sun and sharp drainage; water to establish, then let soil dry between deep waterings.</p>
+          <p class="benefit">Silvery aromatic foliage that's grounding and water-wise; the resinous scent settles the mind.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag touch">Touch</span><span class="tag medicinal">Medicinal</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Heteropyxis_natalensis01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/heteropyxis-natalensis.jpg" alt="Lavender tree (Heteropyxis natalensis)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Heteropyxis natalensis</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Heteropyxis / Lavender tree</h3>
+          <p class="botanical">Heteropyxis natalensis</p>
+          <p class="spotter"><span>Look for:</span> aromatic leaves, pale bark and warm bronze autumn colour.</p>
+          <p class="care"><span>Care:</span> Sunny to light shade; moderate summer water, mulch, and protect young trees from cold wind.</p>
+          <p class="benefit">Crushed leaves smell of lavender — a sleep-and-calm associated scent — with warm autumn colour for year-round interest.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag shade">Shade</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Jasminum_multipartitum_5Dsr_1-2066.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/jasminum-multipartitum.jpg" alt="Wild jasmine (Jasminum multipartitum)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Jasminum multipartitum</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Wild jasmine</h3>
+          <p class="botanical">Jasminum multipartitum</p>
+          <p class="spotter"><span>Look for:</span> glossy leaves and starry white, sweetly scented flowers.</p>
+          <p class="care"><span>Care:</span> Well-drained composted soil; avoid overwatering and prune after flowering to shape.</p>
+          <p class="benefit">Sweetly perfumed white flowers over an arbour create a memorable, mood-lifting "scent destination" — lovely in the evening.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+      <article class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Pelargonium_%C3%97_hortorum_mixed.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC0)"><img src="healing_garden_images/garden-geranium.jpg" alt="Garden geranium (Pelargonium x hortorum / Pelargonium hybrids)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Pelargonium hortorum</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Garden geranium</h3>
+          <p class="botanical">Pelargonium x hortorum / Pelargonium hybrids</p>
+          <p class="spotter"><span>Look for:</span> rounded, softly scented leaves and bright clusters of pink, red, white or purple flowers.</p>
+          <p class="care"><span>Care:</span> Full sun to light shade, well-drained soil, regular deadheading and careful watering at the roots.</p>
+          <p class="benefit">Colourful flowers lift the mood, while many scented-leaf varieties add a gentle touch-and-smell experience for path edges and containers.</p>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag scent">Scent</span><span class="tag touch">Touch</span></div>
+        </div>
+      </article>
+
+      <article class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_-_lavender_-_Lavendel_-_01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/lavender.jpg" alt="Lavender (Lavandula angustifolia)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Lavandula angustifolia</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Lavender</h3>
+          <p class="botanical">Lavandula angustifolia</p>
+          <p class="spotter"><span>Look for:</span> narrow grey-green leaves and upright purple flower spikes with a strong calming scent.</p>
+          <p class="care"><span>Care:</span> Full sun, excellent drainage, light feeding and pruning after flowering to prevent woody growth.</p>
+          <p class="benefit">The purple flowers and familiar fragrance are strongly associated with calm, rest and sensory grounding.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag butterfly">Pollinators</span></div>
+        </div>
+      </article>
+
+      <article class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Basil-Basilico-Ocimum_basilicum-albahaca.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/basil.jpg" alt="Basil (Ocimum basilicum / Ocimum spp.)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Ocimum basilicum</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Basil</h3>
+          <p class="botanical">Ocimum basilicum / Ocimum spp.</p>
+          <p class="spotter"><span>Look for:</span> soft, fragrant green leaves; annual sweet basil is tender, while some African basils become shrubby.</p>
+          <p class="care"><span>Care:</span> Morning sun, rich soil, steady water and frequent tip-pinching for leafy growth.</p>
+          <p class="benefit">A familiar culinary herb with uplifting fragrance; flowering African basils also bring bees and gentle movement into the garden.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag butterfly">Pollinators</span></div>
+        </div>
+      </article>
+
+      <article class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:YosriNov04Pokok_Serai.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.0)"><img src="healing_garden_images/lemongrass.jpg" alt="Lemongrass (Cymbopogon citratus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Cymbopogon citratus</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Lemongrass</h3>
+          <p class="botanical">Cymbopogon citratus</p>
+          <p class="spotter"><span>Look for:</span> tall arching grass blades that release a strong lemon scent when rubbed.</p>
+          <p class="care"><span>Care:</span> Full sun, compost-rich soil, regular summer water and annual cutting back of old leaves.</p>
+          <p class="benefit">Tall scented foliage adds movement, sound and a useful lemon note for tea or culinary interpretation.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag movement">Movement</span><span class="tag taste">Edible part</span></div>
+        </div>
+      </article>
+
+      <article class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Leaves_of_Aloysia_citrodora.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/lemon-verbena.jpg" alt="Lemon verbena (Aloysia citrodora)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Aloysia citrodora</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Lemon verbena</h3>
+          <p class="botanical">Aloysia citrodora</p>
+          <p class="spotter"><span>Look for:</span> narrow, slightly rough leaves with an intense lemon fragrance when crushed.</p>
+          <p class="care"><span>Care:</span> Warm sun, well-drained soil, moderate water and pruning to keep a leafy shrub shape.</p>
+          <p class="benefit">Its clean lemon scent is immediate and memorable, making it a useful stop for sensory signage and supervised tea-garden interpretation.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag touch">Touch</span></div>
+        </div>
+      </article>
+
+      <article class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Gardenia_jasminoides_flower.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/gardenia.jpg" alt="Gardenia (Gardenia jasminoides)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Gardenia jasminoides</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Gardenia</h3>
+          <p class="botanical">Gardenia jasminoides</p>
+          <p class="spotter"><span>Look for:</span> glossy dark leaves and creamy white flowers with a rich sweet perfume.</p>
+          <p class="care"><span>Care:</span> Bright filtered light or morning sun, acidic composted soil, mulch and consistent moisture.</p>
+          <p class="benefit">The white flowers and strong perfume create a quiet, elegant scent moment near seating areas or entrances.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag touch">Glossy leaves</span></div>
+        </div>
+      </article>
+
+      <article class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Thymian_(Thymus_vulgaris),_Nationalpark_Hohe_Tauern.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 4.0)"><img src="healing_garden_images/thyme.jpg" alt="Thyme (Thymus vulgaris)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Thymus vulgaris</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Thyme</h3>
+          <p class="botanical">Thymus vulgaris</p>
+          <p class="spotter"><span>Look for:</span> tiny aromatic leaves on low woody stems, often forming a soft ground-covering mat.</p>
+          <p class="care"><span>Care:</span> Full sun, lean gritty soil, little water and light trimming after flowering.</p>
+          <p class="benefit">Low, aromatic foliage works well along edges where touch and scent can be noticed without blocking views.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag touch">Touch</span></div>
+        </div>
+      </article>
+</div>
+  </section>
+
+  <!-- MEDICINAL & CULTURAL -->
+  <section class="section" id="medicinal">
+    <div class="section-head">
+      <h2>Indigenous medicinal &amp; cultural</h2>
+      <span class="count">five plants</span>
+      <p>The garden's "useful plants" heritage — ideal for interpretive signage.</p>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Artemisia_afra_07102003_Afrique_du_sud.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/artemisia-afra.jpg" alt="African wormwood (Artemisia afra)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Artemisia afra</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">African wormwood</h3>
+          <p class="botanical">Artemisia afra</p>
+          <p class="zulu">umhlonyane</p>
+          <p class="spotter"><span>Look for:</span> soft grey, finely divided leaves with a sharp herbal scent.</p>
+          <p class="care"><span>Care:</span> Full sun, good drainage and a hard winter prune for fresh spring growth.</p>
+          <p class="benefit">One of South Africa's most-used traditional medicines (colds, fevers, coughs); soft silver foliage and a clean, clarifying aroma.</p>
+          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag scent">Scent</span><span class="tag touch">Touch</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Tulbaghia_(Society_Garlic).jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/tulbaghia-violacea.jpg" alt="Wild garlic (Tulbaghia violacea)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Tulbaghia violacea</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Wild garlic</h3>
+          <p class="botanical">Tulbaghia violacea</p>
+          <p class="zulu">isihaqa</p>
+          <p class="spotter"><span>Look for:</span> narrow garlic-scented leaves and mauve star-shaped flowers.</p>
+          <p class="care"><span>Care:</span> Full sun to partial shade; regular summer water for flowers, then divide crowded clumps.</p>
+          <p class="benefit">Long-lasting mauve flowers and a bee-and-butterfly draw; traditionally associated with colds and flu; the garlic-scented leaves need clear labelling and supervised use.</p>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Butterflies</span><span class="tag medicinal">Medicinal</span><span class="tag taste">Edible part</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bulbine_frutescens_2.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/bulbine-frutescens.jpg" alt="Bulbine (Bulbine frutescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Bulbine frutescens</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Bulbine</h3>
+          <p class="botanical">Bulbine frutescens</p>
+          <p class="spotter"><span>Look for:</span> succulent green leaves and yellow-orange flower spikes.</p>
+          <p class="care"><span>Care:</span> Full sun, free-draining composted soil; water sparingly once established and deadhead.</p>
+          <p class="benefit">Cheerful orange-yellow flowers almost year-round; its leaf gel is a classic first-aid remedy for burns, bites and grazes.</p>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag medicinal">Medicinal</span><span class="tag butterfly">Pollinators</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:2018-08-05_Sutherlandia_frutescens.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/lessertia-frutescens.jpg" alt="Cancer bush (Sutherlandia / Lessertia frutescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Lessertia frutescens</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Cancer bush</h3>
+          <p class="botanical">Sutherlandia / Lessertia frutescens</p>
+          <p class="spotter"><span>Look for:</span> red pea-like flowers followed by inflated papery pods.</p>
+          <p class="care"><span>Care:</span> Full sun and very free drainage; little water, no overwatering, replace older plants.</p>
+          <p class="benefit">A revered traditional tonic and immune plant; red flowers and inflated papery pods make it a story-rich specimen.</p>
+          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Aloe_arborescens_-_Candelabra_aloe_01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/aloe-arborescens.jpg" alt="Krantz aloe (Aloe arborescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Aloe arborescens</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Krantz aloe</h3>
+          <p class="botanical">Aloe arborescens</p>
+          <p class="spotter"><span>Look for:</span> branching rosettes and upright orange-red winter flower candles.</p>
+          <p class="care"><span>Care:</span> Full sun, gritty drainage and deep infrequent watering; keep roots dry in winter.</p>
+          <p class="benefit">Bold sculptural form with winter nectar that brings sunbirds in close; leaf gel soothes burns and skin.</p>
+          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag birds">Birds</span><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BIRD-ATTRACTING -->
+  <section class="section" id="birds">
+    <div class="section-head">
+      <h2>Bird-attracting</h2>
+      <span class="count">five plants</span>
+      <p>Birdsong, colour and movement — the living "positive distractions" of a healing garden.</p>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Tecoma_capensis_3.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/tecoma-capensis.jpg" alt="Cape honeysuckle (Tecoma capensis)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Tecoma capensis</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Cape honeysuckle</h3>
+          <p class="botanical">Tecoma capensis</p>
+          <p class="spotter"><span>Look for:</span> glossy hedge growth and orange tubular flowers.</p>
+          <p class="care"><span>Care:</span> Sun or semi-shade; water weekly while establishing and prune hard to control shape.</p>
+          <p class="benefit">Orange-red tubular flowers reliably pull in sunbirds — fast colour and life for a focal bed.</p>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Leonotis_leonorus10.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/leonotis-leonurus.jpg" alt="Wild dagga (Leonotis leonurus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Leonotis leonurus</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Wild dagga</h3>
+          <p class="botanical">Leonotis leonurus</p>
+          <p class="spotter"><span>Look for:</span> tall stems with orange flower whorls around the stem.</p>
+          <p class="care"><span>Care:</span> Full sun, compost and growing-season water; cut back after flowering for strong regrowth.</p>
+          <p class="benefit">Tall orange flower whorls bring sunbirds and strong vertical structure; traditionally a calming remedy.</p>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag medicinal">Medicinal</span><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Halleria_lucida_3.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/halleria-lucida.jpg" alt="Tree fuchsia (Halleria lucida)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Halleria lucida</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Tree fuchsia</h3>
+          <p class="botanical">Halleria lucida</p>
+          <p class="spotter"><span>Look for:</span> small tree form, orange-red tube flowers and dark fruit.</p>
+          <p class="care"><span>Care:</span> Nutrient-rich loam and steady water while young; protect young trees from frost.</p>
+          <p class="benefit">Locally native; nectar flowers feed sunbirds and the fruit feeds many birds — a living, animated, water-wise tree.</p>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag shade">Shade</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bird_of_Paradise_flower.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/strelitzia-reginae.jpg" alt="Crane flower (Strelitzia reginae)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Strelitzia reginae</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Crane flower</h3>
+          <p class="botanical">Strelitzia reginae</p>
+          <p class="spotter"><span>Look for:</span> paddle-shaped leaves and orange-blue bird-like blooms.</p>
+          <p class="care"><span>Care:</span> Sun to light shade, composted soil and regular summer water; do not disturb clumps often.</p>
+          <p class="benefit">Iconic sculptural "bird" blooms double as sunbird nectar — a strong, exotic visual anchor.</p>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Starr_010820-0009_Carissa_macrocarpa.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 3.0)"><img src="healing_garden_images/carissa-macrocarpa.jpg" alt="Num-num (Carissa macrocarpa)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Carissa macrocarpa</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Num-num</h3>
+          <p class="botanical">Carissa macrocarpa</p>
+          <p class="spotter"><span>Look for:</span> glossy thorny hedge, white star flowers and red plum-like fruit.</p>
+          <p class="care"><span>Care:</span> Sun to semi-shade; deep water until established, then prune as a dense hedge.</p>
+          <p class="benefit">Fragrant white flowers, glossy leaves and edible red fruit — a multi-sensory hedge that feeds birds and offers a recognisable edible fruit when correctly identified and supervised.</p>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag birds">Birds</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BUTTERFLY & POLLINATOR -->
+  <section class="section" id="pollinators">
+    <div class="section-head">
+      <h2>Butterfly &amp; pollinator</h2>
+      <span class="count">four plants</span>
+      <p>Gentle, mesmerising movement — textbook "soft fascination" that restores tired attention.</p>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Kiggelaria_africana_1DS-II_3742.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/kiggelaria-africana.jpg" alt="Wild peach (Kiggelaria africana)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Kiggelaria africana</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Wild peach</h3>
+          <p class="botanical">Kiggelaria africana</p>
+          <p class="spotter"><span>Look for:</span> oval leaves, orange split fruit and a light shade-tree canopy.</p>
+          <p class="care"><span>Care:</span> Sun or light shade; moderate water when young and leave caterpillars as part of the ecology.</p>
+          <p class="benefit">Host tree for the garden acraea butterfly, so it guarantees butterflies — and the birds that follow them; fine shade too.</p>
+          <div class="card-tags"><span class="tag butterfly">Butterflies</span><span class="tag birds">Birds</span><span class="tag shade">Shade</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Buddleja_salvifolia.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/buddleja-salviifolia.jpg" alt="Sagewood (Buddleja salviifolia)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Buddleja salviifolia</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Sagewood</h3>
+          <p class="botanical">Buddleja salviifolia</p>
+          <p class="spotter"><span>Look for:</span> grey-green wrinkled leaves and lilac honey-scented flower sprays.</p>
+          <p class="care"><span>Care:</span> Full sun, good drainage and a prune after flowering to keep it compact.</p>
+          <p class="benefit">Honey-scented lilac flower trusses that hum with butterflies and bees — scent, sound and movement together.</p>
+          <div class="card-tags"><span class="tag butterfly">Butterflies</span><span class="tag scent">Scent</span><span class="tag movement">Sound</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Barleria_obtusa_1DS-II_4-3309.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/barleria-obtusa.jpg" alt="Bush violet (Barleria obtusa)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Barleria obtusa</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Bush violet</h3>
+          <p class="botanical">Barleria obtusa</p>
+          <p class="spotter"><span>Look for:</span> low mounding growth with soft mauve-blue flowers.</p>
+          <p class="care"><span>Care:</span> Sun to semi-shade; prune after autumn flowering and pinch tips for more bloom.</p>
+          <p class="benefit">A froth of soft mauve-blue autumn flowers — a calming colour wash and a butterfly draw when colour is most welcome.</p>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Butterflies</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Blue_flowers01.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/plumbago-auriculata.jpg" alt="Plumbago (Plumbago auriculata)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Plumbago auriculata</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Plumbago</h3>
+          <p class="botanical">Plumbago auriculata</p>
+          <p class="spotter"><span>Look for:</span> pale blue flower clusters and a loose scrambling habit.</p>
+          <p class="care"><span>Care:</span> Sun to semi-shade; compost, moderate water and regular cutting back to control spread.</p>
+          <p class="benefit">Soft sky-blue flowers — among the most soothing colours available — host blue butterflies and shelter small birds.</p>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Butterflies</span><span class="tag birds">Birds</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- CALMING VISUAL -->
+  <section class="section" id="visual">
+    <div class="section-head">
+      <h2>Calming visual</h2>
+      <span class="count">four plants</span>
+      <p>Colour, form and movement chosen to lower arousal and quiet a busy mind.</p>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:BCBG_Agapanthus_Praecox_04.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0 au)"><img src="healing_garden_images/agapanthus-praecox.jpg" alt="Agapanthus (Agapanthus praecox)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Agapanthus praecox</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Agapanthus</h3>
+          <p class="botanical">Agapanthus praecox</p>
+          <p class="spotter"><span>Look for:</span> strap leaves and tall blue or white flower spheres.</p>
+          <p class="care"><span>Care:</span> Full sun, compost-rich drainage and weekly deep spring-summer watering for best flowers.</p>
+          <p class="benefit">Blue-and-white flower globes are among the most calming in the palette; mass plantings read as serene and orderly. <em>(Toxic if eaten — label.)</em></p>
+          <div class="card-tags"><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Dietes_grandiflora_or_Fairy_Iris.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.0)"><img src="healing_garden_images/dietes-grandiflora.jpg" alt="Wild iris (Dietes grandiflora)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Dietes grandiflora</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Wild iris</h3>
+          <p class="botanical">Dietes grandiflora</p>
+          <p class="spotter"><span>Look for:</span> sword-like leaves and white flowers with mauve-yellow markings.</p>
+          <p class="care"><span>Care:</span> Full sun or light shade; composted soil and good summer water for maximum flowering.</p>
+          <p class="benefit">Elegant white-and-mauve blooms on swaying stems; evergreen and serene — a low-effort calming anchor.</p>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag movement">Movement</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bush_Lily_(Clivia_miniata)_(32603733520).jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 2.0)"><img src="healing_garden_images/clivia-miniata.jpg" alt="Clivia (Clivia miniata)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Clivia miniata</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Clivia</h3>
+          <p class="botanical">Clivia miniata</p>
+          <p class="spotter"><span>Look for:</span> dark strap leaves and orange trumpets in shade.</p>
+          <p class="care"><span>Care:</span> Dappled shade, compost mulch and summer water; reduce watering in winter.</p>
+          <p class="benefit">Glowing orange flowers that bring warmth and life to deep shade — turning dark corners into welcoming refuges. <em>(Toxic if eaten — label.)</em></p>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag shade">Shade-lover</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Themeda_triandra_-_kangaroo_grass.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/themeda-triandra.jpg" alt="Red grass (Themeda triandra)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Themeda triandra</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Red grass</h3>
+          <p class="botanical">Themeda triandra</p>
+          <p class="spotter"><span>Look for:</span> fine seed heads and copper-red colour in dry months.</p>
+          <p class="care"><span>Care:</span> Full sun, lean soil and first-year water; cut old seed heads late winter.</p>
+          <p class="benefit">The garden's movement-and-sound layer — sways, rustles and catches low light, and feeds seed-eating birds. Native to the local veld.</p>
+          <div class="card-tags"><span class="tag movement">Movement</span><span class="tag birds">Birds</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SHADE TREE -->
+  <section class="section" id="shade">
+    <div class="section-head">
+      <h2>Shade &amp; shelter</h2>
+      <span class="count">one tree</span>
+      <p>A destination tree for resting beneath.</p>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Calodendrum_capense.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.5)"><img src="healing_garden_images/calodendrum-capense.jpg" alt="Cape chestnut (Calodendrum capense)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Calodendrum capense</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Cape chestnut</h3>
+          <p class="botanical">Calodendrum capense</p>
+          <p class="spotter"><span>Look for:</span> glossy leaves and clouds of pink spring blossom.</p>
+          <p class="care"><span>Care:</span> Warm sun, deep composted soil and plenty of spring-summer water while young.</p>
+          <p class="benefit">Clouds of fragrant pink spring blossom (an uplifting seasonal event), generous dappled shade for rest, and a butterfly draw.</p>
+          <div class="card-tags"><span class="tag shade">Shade</span><span class="tag scent">Scent</span><span class="tag butterfly">Butterflies</span><span class="tag colour">Colour</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- AVOID -->
+  <section class="section avoid" id="avoid">
+    <div class="section-head">
+      <h2>Plants to keep out</h2>
+      <span class="count">recognise &amp; remove</span>
+      <p>Beautiful but highly toxic — unsafe for an unsupervised public garden. Learn them by sight.</p>
+    </div>
+    <div class="grid">
+
+      <article class="card danger">
+        <div class="plate"><span class="skull">Toxic</span><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Dettaglio_-_Apocinaceae_Nerium_oleander_Lin._Erbario_Frizzi_Perugia_n._270.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/nerium-oleander.jpg" alt="Oleander (Nerium oleander)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">⚠</span><span class="phname">Nerium oleander</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Oleander</h3>
+          <p class="botanical">Nerium oleander</p>
+          <p class="spotter"><span>Look for:</span> narrow leathery leaves and showy pink, white or red flowers; remove on sight.</p>
+          <p class="care"><span>Care:</span> Do not plant; remove with gloves, bag waste, and never burn or compost trimmings.</p>
+          <p class="benefit">Every part is highly poisonous and it's also a declared invasive in South Africa. Exclude entirely.</p>
+          <div class="card-tags"><span class="tag">Do not plant</span></div>
+        </div>
+      </article>
+
+      <article class="card danger">
+        <div class="plate"><span class="skull">Toxic</span><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Brugmansia.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/brugmansia-datura.jpg" alt="Angel&#39;s trumpet (Brugmansia / Datura spp.)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">⚠</span><span class="phname">Brugmansia / Datura</span><span class="phnote">photo unavailable</span></div></div>
+        <div class="card-body">
+          <h3 class="common">Angel's trumpet</h3>
+          <p class="botanical">Brugmansia / Datura spp.</p>
+          <p class="spotter"><span>Look for:</span> large hanging trumpet flowers and soft broad leaves; remove on sight.</p>
+          <p class="care"><span>Care:</span> Do not plant; remove with protective clothing and keep all plant parts away from children.</p>
+          <p class="benefit">All parts highly toxic and hallucinogenic — a frequent cause of poisoning. Keep out, especially anywhere children visit.</p>
+          <div class="card-tags"><span class="tag">Do not plant</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+<section class="note care-guide" id="care-guide">
+  <div class="box">
+    <h3>Watering &amp; Care Guide</h3>
+    <p>Use this as the garden team's practical maintenance sheet. Adjust watering after rain, during heat waves and while new plants are establishing.</p>
+    <div class="care-rule">
+      <p><strong>New planting</strong>Water deeply at the root zone for the first 8-12 weeks, then reduce frequency as roots settle.</p>
+      <p><strong>Mulch</strong>Keep a 50-75 mm organic mulch layer around plants, pulled back from stems and trunks.</p>
+      <p><strong>Check before watering</strong>Feel the soil below the mulch. If it is still cool and damp, wait; if dry below finger depth, water deeply.</p>
+    </div>
+    <p class="care-swipe-hint">Swipe the table sideways to see all columns →</p>
+    <div class="care-table-wrap">
+      <table class="care-table">
+        <thead>
+          <tr><th>Plant</th><th>Watering</th><th>Light &amp; Soil</th><th>Care Work</th><th>Watch / Safety</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>Peppermint pelargonium</td><td>Regular light-to-moderate water while establishing; keep evenly moist in hot spells, never waterlogged.</td><td>Semi-shade or bright filtered light; fertile, well-drained soil or a potting mix with compost.</td><td>Pinch or trim to keep it bushy; remove tired stems and keep air moving around the fuzzy leaves.</td><td>Avoid wet, stagnant foliage and heavy shade.</td></tr>
+        <tr><td>Wild rosemary</td><td>Low once established; water deeply during long dry spells rather than little-and-often.</td><td>Full sun; sandy or loamy, very well-drained soil.</td><td>Lightly shape after flowering or in late autumn; avoid rich, wet soil.</td><td>Overwatering makes this aromatic shrub weak and short-lived.</td></tr>
+        <tr><td>Lavender tree</td><td>Moderate; deep water in warm months while young, then reduce once established.</td><td>Full sun to light shade; loamy, well-drained soil with compost.</td><td>Mulch annually; prune only to lift the canopy or remove crossing branches.</td><td>Young trees need frost and wind protection.</td></tr>
+        <tr><td>Wild jasmine</td><td>Moderate; water during dry spells but allow the soil to drain and dry slightly.</td><td>Sun to partial shade; prepared, composted, well-drained soil.</td><td>Tip-prune young shoots for density; shape or reduce after flowering.</td><td>Too much water can cause dieback.</td></tr>
+        <tr><td>African wormwood</td><td>Moderate in active summer growth; lower once established and avoid wet soil.</td><td>Full sun; average to moderately fertile, well-drained soil.</td><td>Cut back hard in winter; divide or take cuttings when clumps spread.</td><td>Rich wet soil can cause root problems and floppy growth.</td></tr>
+        <tr><td>Wild garlic</td><td>Moderate; water regularly in the growing season and reduce in winter.</td><td>Full sun gives best flowers; light, well-drained soil with compost.</td><td>Remove spent flower stalks; divide clumps every few years.</td><td>Avoid waterlogged soil and label edible use clearly.</td></tr>
+        <tr><td>Bulbine</td><td>Low to moderate; let soil dry slightly between waterings.</td><td>Full sun or light semi-shade; well-drained soil enriched with compost.</td><td>Deadhead for more flowers; prune or divide when untidy.</td><td>Root rot follows soggy soil.</td></tr>
+        <tr><td>Cancer bush</td><td>Low once established; water new plants until rooted, then only in dry periods.</td><td>Full sun; poor to average soil is fine if drainage is excellent.</td><td>Allow self-seeding or replace after a few seasons; avoid transplanting large plants.</td><td>Short-lived and dislikes wet containers.</td></tr>
+        <tr><td>Krantz aloe</td><td>Low; water deeply, then let soil dry before watering again.</td><td>Full sun; well-drained, compost-enriched sandy or loamy soil.</td><td>Remove spent flower stalks and old leaves; feed lightly in spring if needed.</td><td>Severe frost and wet roots are the main risks.</td></tr>
+        <tr><td>Cape honeysuckle</td><td>Moderate in the first year and in full sun; lower in semi-shade once established.</td><td>Full sun for best flowers, semi-shade tolerated; well-drained soil.</td><td>Clip as a hedge or cut back after flowering flushes to prevent sprawling.</td><td>Can become unruly if not pruned.</td></tr>
+        <tr><td>Wild dagga</td><td>Moderate during active growth; reduce when dormant or cool.</td><td>Full sun; rich, well-drained loam with compost and mulch.</td><td>Cut back after flowering or late winter; feed with organic fertiliser at spring growth.</td><td>Leggy stems need seasonal pruning.</td></tr>
+        <tr><td>Tree fuchsia</td><td>Moderate; grows fastest with year-round moisture but tolerates dry periods when established.</td><td>Sun, semi-shade or dappled shade; fertile, well-drained loam.</td><td>Lightly trim to shape; mulch and compost young trees.</td><td>Young plants are more frost-sensitive.</td></tr>
+        <tr><td>Crane flower</td><td>Moderate; keep evenly moist in warm growth but never waterlogged.</td><td>Full sun to light shade; rich, well-drained soil or large tubs.</td><td>Remove old leaves and spent flower stalks; feed during active growth.</td><td>Moved or divided clumps can take years to flower again.</td></tr>
+        <tr><td>Num-num</td><td>Moderate while establishing; once rooted, water deeply and let soil dry between waterings.</td><td>Full sun for fruiting, semi-shade tolerated; compost-enriched, well-drained soil.</td><td>Prune to hedge shape; mulch to protect shallow feeder roots.</td><td>Thorns near paths need careful placement and trimming.</td></tr>
+        <tr><td>Wild peach</td><td>Moderate while establishing; drought tolerant once established but grows faster with seasonal water.</td><td>Sun to light shade; well-drained soil with compost at planting.</td><td>Prune low shoots if a clear trunk is wanted; mulch young trees.</td><td>Butterfly caterpillars may defoliate it temporarily; trees usually recover.</td></tr>
+        <tr><td>Sagewood</td><td>Low to moderate; water deeply in dry spells and let soil drain.</td><td>Full sun for best flowering; well-drained average soil.</td><td>Prune after flowering because it flowers on older wood; add compost in late winter.</td><td>Protect young plants from hard frost and cold wind.</td></tr>
+        <tr><td>Bush violet</td><td>Moderate during establishment and dry summer spells.</td><td>Sun or semi-shade; well-drained garden soil.</td><td>Prune after flowering for compact growth; nip spring shoots to encourage flowers.</td><td>Can become woody if not cut back.</td></tr>
+        <tr><td>Plumbago</td><td>Moderate while establishing; drought resistant once settled, but flowers better with summer water.</td><td>Full sun to semi-shade; any good soil, improved with compost.</td><td>Cut back after winter or after growth flushes; train or clip as needed.</td><td>Scrambles and suckers if allowed to roam.</td></tr>
+        <tr><td>Agapanthus</td><td>Moderate to high in spring and summer; deep weekly watering is better than shallow sprinkling.</td><td>Full sun or light semi-shade; rich, well-drained soil with compost.</td><td>Remove spent stalks; divide crowded clumps in spring when flowering declines.</td><td>Toxic if eaten, so label in public areas.</td></tr>
+        <tr><td>Wild iris</td><td>Moderate; water well in summer, but tolerate drier periods once established.</td><td>Full sun or light shade; well-composted, well-drained soil.</td><td>Remove old leaves and spent flower stems; split clumps if overcrowded.</td><td>May self-seed; remove unwanted seedlings.</td></tr>
+        <tr><td>Clivia</td><td>Regular in summer growth; reduce in winter and let soil dry slightly between watering.</td><td>Dappled shade; well-composted, well-drained, airy soil.</td><td>Mulch annually; feed in summer; remove yellow leaves and spent stems.</td><td>Leaves burn in sun, and the plant is toxic if eaten.</td></tr>
+        <tr><td>Red grass</td><td>Water during the first year; after establishment, low water is usually enough.</td><td>Full sun; average to clay soil, preferably not overly rich.</td><td>Comb or cut back old growth at the end of winter before new shoots.</td><td>Overwatering and overfeeding can make grasses floppy.</td></tr>
+        <tr><td>Cape chestnut</td><td>Moderate to generous in spring and summer, especially while establishing.</td><td>Warm sunny position; deep, fertile, well-composted, well-drained soil.</td><td>Mulch widely, protect from persistent wind, and train a balanced canopy while young.</td><td>Young trees need frost and wind protection.</td></tr>
+        <tr><td>Oleander</td><td>No garden watering plan: exclude it from the planting scheme.</td><td>Keep out of public or unsupervised gardens.</td><td>If present, wear gloves, long sleeves and eye protection; bag and dispose of cut material safely.</td><td>All parts are highly toxic; smoke from burning is also dangerous.</td></tr>
+        <tr><td>Angel&#39;s trumpet</td><td>No garden watering plan: exclude it from the planting scheme.</td><td>Keep out of public or unsupervised gardens.</td><td>Wear gloves and eye protection for removal; bag plant material and clean tools afterwards.</td><td>All parts are toxic and sap/perfume can irritate sensitive people.</td></tr>
+        <tr class="extra-plant-row"><td>Garden geranium</td><td>Moderate; water when the top soil dries, and reduce in cool weather.</td><td>Full sun to light shade; fertile, well-drained soil or containers.</td><td>Deadhead regularly, pinch leggy stems, and remove yellow leaves.</td><td>Avoid wet leaves and waterlogged soil, which invite fungal disease.</td></tr>
+        <tr class="extra-plant-row"><td>Lavender</td><td>Low to moderate; water deeply while establishing, then let soil dry between waterings.</td><td>Full sun; gritty, alkaline-to-neutral, well-drained soil.</td><td>Trim after flowering and lightly shape in spring; avoid cutting into old bare wood.</td><td>Humid, wet soil can shorten its life.</td></tr>
+        <tr class="extra-plant-row"><td>Basil</td><td>Moderate to regular; keep evenly moist but not soggy, especially in heat.</td><td>Morning sun or full sun with good water; fertile, compost-rich soil.</td><td>Pinch tips often, remove flowers for leaf production, or leave some flowers for bees.</td><td>Sweet basil is frost tender and usually annual.</td></tr>
+        <tr class="extra-plant-row"><td>Lemongrass</td><td>Moderate to generous in summer; reduce in winter and avoid standing water.</td><td>Full sun; fertile, well-drained soil with compost and mulch.</td><td>Cut back tired leaves at the end of winter; divide large clumps when crowded.</td><td>Leaf edges can be sharp, so keep it back from narrow paths.</td></tr>
+        <tr class="extra-plant-row"><td>Lemon verbena</td><td>Moderate; water regularly in hot growth, then reduce in winter.</td><td>Full sun to light shade; light, well-drained soil enriched with compost.</td><td>Prune in spring after cold damage risk, and pinch tips for bushiness.</td><td>Can drop leaves in cold weather; protect young plants from frost.</td></tr>
+        <tr class="extra-plant-row"><td>Gardenia</td><td>Moderate and consistent; keep soil evenly moist but not saturated.</td><td>Morning sun or bright filtered light; acidic, compost-rich, well-drained soil.</td><td>Mulch, feed with acid-loving fertiliser, and prune lightly after flowering.</td><td>Yellow leaves often signal alkaline soil, poor drainage or nutrient stress.</td></tr>
+        <tr class="extra-plant-row"><td>Thyme</td><td>Low; water to establish, then allow soil to dry between deep waterings.</td><td>Full sun; lean, sandy or gritty, sharply drained soil.</td><td>Trim lightly after flowering and replace woody old plants when they thin out.</td><td>Dislikes wet feet and heavy shade.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="care-sources">Care notes were cross-checked with <a href="https://pza.sanbi.org/" target="_blank" rel="noopener">SANBI PlantZAfrica</a> plant profiles and supplementary horticultural toxicity/growing references for species where watering details were limited.</p>
+  </div>
+</section>
+<section class="note">
+  <div class="box">
+    <h3>Using project photographs</h3>
+    <p>The catalogue now uses reference photographs for every plant. For a final site-specific version, replace these with photographs taken in the actual garden so visitors can recognise the plants exactly as they will see them on the path.</p>
+    <p>Keep the file and the <code>healing_garden_images</code> folder together. If you change a photo, keep the same filename or update the matching <code>src</code> value in the card.</p>
+  </div>
+</section>
+<section class="note garden-combinations" id="garden-combinations">
+  <div class="box">
+    <h3>Suggested Garden Combinations</h3>
+    <p>These photo boards use the actual plant pictures from the catalogue so non-specialists can recognise the look, height layer and planting role of each combination.</p>
+    <div class="combo-grid">
+      <article class="combo-card">
+        <img src="garden_combination_images/dry-sunny-aromatic.png" alt="Dry Sunny Aromatic Bed photo-based planting combination" loading="lazy" decoding="async">
+        <div class="combo-body">
+          <h4>Dry Sunny Aromatic Bed</h4>
+          <p>Low-water, full-sun planting with silver foliage, herbs and warm flower accents.</p>
+          <p class="combo-note">Best for the hottest, driest edge of the garden. Keep soil sharply drained.</p>
+          <ul><li>Lavender</li><li>Thyme</li><li>Wild rosemary</li><li>Bulbine</li><li>Krantz aloe</li><li>Red grass</li></ul>
+        </div>
+      </article>
+      <article class="combo-card">
+        <img src="garden_combination_images/lemon-tea-sensory.png" alt="Lemon &amp; Tea Sensory Bed photo-based planting combination" loading="lazy" decoding="async">
+        <div class="combo-body">
+          <h4>Lemon &amp; Tea Sensory Bed</h4>
+          <p>A fragrant path-side bed for touch, scent and supervised culinary interpretation.</p>
+          <p class="combo-note">Plant near a path so visitors can smell leaves without stepping into the bed.</p>
+          <ul><li>Lemongrass</li><li>Lemon verbena</li><li>Basil</li><li>Pelargonium</li><li>Wild garlic</li></ul>
+        </div>
+      </article>
+      <article class="combo-card">
+        <img src="garden_combination_images/fragrant-flower.png" alt="Fragrant Flower Entrance Bed photo-based planting combination" loading="lazy" decoding="async">
+        <div class="combo-body">
+          <h4>Fragrant Flower Entrance Bed</h4>
+          <p>Perfumed shrubs and soft flowers for benches, entries and slow walking moments.</p>
+          <p class="combo-note">Give Gardenia richer, slightly acidic soil and keep Lavender to the drier front edge.</p>
+          <ul><li>Gardenia</li><li>Wild jasmine</li><li>Geranium</li><li>Heteropyxis</li><li>Clivia</li></ul>
+        </div>
+      </article>
+      <article class="combo-card">
+        <img src="garden_combination_images/bird-sunbird.png" alt="Bird &amp; Sunbird Bed photo-based planting combination" loading="lazy" decoding="async">
+        <div class="combo-body">
+          <h4>Bird &amp; Sunbird Bed</h4>
+          <p>Nectar, fruit, height and movement to bring life close to the walkway.</p>
+          <p class="combo-note">Keep thorny Num-num set back from tight paths; prune Cape honeysuckle often.</p>
+          <ul><li>Cape honeysuckle</li><li>Wild dagga</li><li>Krantz aloe</li><li>Tree fuchsia</li><li>Strelitzia</li><li>Num-num</li></ul>
+        </div>
+      </article>
+      <article class="combo-card">
+        <img src="garden_combination_images/butterfly-pollinator.png" alt="Butterfly &amp; Pollinator Bed photo-based planting combination" loading="lazy" decoding="async">
+        <div class="combo-body">
+          <h4>Butterfly &amp; Pollinator Bed</h4>
+          <p>Layered flowers for bees, butterflies and soft fascination.</p>
+          <p class="combo-note">Let some basil flower for bees, and prune Plumbago so it does not swallow smaller plants.</p>
+          <ul><li>Sagewood</li><li>Plumbago</li><li>Bush violet</li><li>Wild peach</li><li>Basil</li><li>Tulbaghia</li></ul>
+        </div>
+      </article>
+      <article class="combo-card">
+        <img src="garden_combination_images/shade-resting.png" alt="Shade &amp; Resting Bed photo-based planting combination" loading="lazy" decoding="async">
+        <div class="combo-body">
+          <h4>Shade &amp; Resting Bed</h4>
+          <p>A calm seating garden with dappled shade, white flowers and glossy foliage.</p>
+          <p class="combo-note">Best for a bench or pause point. Keep roots mulched and water young trees deeply.</p>
+          <ul><li>Cape chestnut</li><li>Clivia</li><li>Wild iris</li><li>Gardenia</li><li>Wild jasmine</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="note photo-credits" id="photo-credits">
+  <div class="box">
+    <h3>Photo credits</h3>
+    <p>Reference photographs are from Wikimedia Commons. Click a plant name to open the source file page and full license details.</p>
+    <ol class="credits-list">
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Pelargonium_tomentosum_05.jpg" target="_blank" rel="noopener">Peppermint pelargonium</a></span> <em>Pelargonium tomentosum</em>. Photo: Michael Wolf. License: CC BY-SA 3.0.<span class="credit-file">Pelargonium tomentosum 05.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:African_Rosemary.jpg" target="_blank" rel="noopener">Wild rosemary</a></span> <em>Eriocephalus africanus</em>. Photo: S. Edwards, Sydenham. License: Public domain.<span class="credit-file">African Rosemary.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Heteropyxis_natalensis01.jpg" target="_blank" rel="noopener">Lavender tree</a></span> <em>Heteropyxis natalensis</em>. Photo: Rotational. License: Public domain.<span class="credit-file">Heteropyxis natalensis01.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Jasminum_multipartitum_5Dsr_1-2066.jpg" target="_blank" rel="noopener">Wild jasmine</a></span> <em>Jasminum multipartitum</em>. Photo: SAplants. License: CC BY-SA 4.0.<span class="credit-file">Jasminum multipartitum 5Dsr 1-2066.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Artemisia_afra_07102003_Afrique_du_sud.jpg" target="_blank" rel="noopener">African wormwood</a></span> <em>Artemisia afra</em>. Photo: H Brisse (upload by Abalg). License: CC BY-SA 3.0.<span class="credit-file">Artemisia afra 07102003 Afrique du sud.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Tulbaghia_(Society_Garlic).jpg" target="_blank" rel="noopener">Wild garlic</a></span> <em>Tulbaghia violacea</em>. Photo: Wikimedia Commons contributor. License: CC BY-SA 3.0.<span class="credit-file">Tulbaghia (Society Garlic).jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Bulbine_frutescens_2.jpg" target="_blank" rel="noopener">Bulbine</a></span> <em>Bulbine frutescens</em>. Photo: Stan Shebs. License: CC BY-SA 3.0.<span class="credit-file">Bulbine frutescens 2.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:2018-08-05_Sutherlandia_frutescens.jpg" target="_blank" rel="noopener">Cancer bush</a></span> <em>Sutherlandia / Lessertia frutescens</em>. Photo: Andrawaag. License: CC BY-SA 4.0.<span class="credit-file">2018-08-05 Sutherlandia frutescens.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Aloe_arborescens_-_Candelabra_aloe_01.jpg" target="_blank" rel="noopener">Krantz aloe</a></span> <em>Aloe arborescens</em>. Photo: Zeynel Cebeci. License: CC BY-SA 4.0.<span class="credit-file">Aloe arborescens - Candelabra aloe 01.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Tecoma_capensis_3.jpg" target="_blank" rel="noopener">Cape honeysuckle</a></span> <em>Tecoma capensis</em>. Photo: Franz Xaver. License: CC BY-SA 4.0.<span class="credit-file">Tecoma capensis 3.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Leonotis_leonorus10.jpg" target="_blank" rel="noopener">Wild dagga</a></span> <em>Leonotis leonurus</em>. Photo: Urban. License: Public domain.<span class="credit-file">Leonotis leonorus10.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Halleria_lucida_3.jpg" target="_blank" rel="noopener">Tree fuchsia</a></span> <em>Halleria lucida</em>. Photo: Stan Shebs. License: CC BY-SA 3.0.<span class="credit-file">Halleria lucida 3.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Bird_of_Paradise_flower.JPG" target="_blank" rel="noopener">Crane flower</a></span> <em>Strelitzia reginae</em>. Photo: Brocken Inaglory. License: CC BY-SA 3.0.<span class="credit-file">Bird of Paradise flower.JPG</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Starr_010820-0009_Carissa_macrocarpa.jpg" target="_blank" rel="noopener">Num-num</a></span> <em>Carissa macrocarpa</em>. Photo: Forest &amp; Kim Starr. License: CC BY 3.0.<span class="credit-file">Starr 010820-0009 Carissa macrocarpa.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Kiggelaria_africana_1DS-II_3742.jpg" target="_blank" rel="noopener">Wild peach</a></span> <em>Kiggelaria africana</em>. Photo: SAplants. License: CC BY-SA 4.0.<span class="credit-file">Kiggelaria africana 1DS-II 3742.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Buddleja_salvifolia.jpg" target="_blank" rel="noopener">Sagewood</a></span> <em>Buddleja salviifolia</em>. Photo: Wikimedia Commons contributor. License: CC BY-SA 4.0.<span class="credit-file">Buddleja salvifolia.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Barleria_obtusa_1DS-II_4-3309.jpg" target="_blank" rel="noopener">Bush violet</a></span> <em>Barleria obtusa</em>. Photo: SAplants. License: CC BY-SA 4.0.<span class="credit-file">Barleria obtusa 1DS-II 4-3309.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Blue_flowers01.JPG" target="_blank" rel="noopener">Plumbago</a></span> <em>Plumbago auriculata</em>. Photo: ErgoSum88. License: Public domain.<span class="credit-file">Blue flowers01.JPG</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:BCBG_Agapanthus_Praecox_04.jpg" target="_blank" rel="noopener">Agapanthus</a></span> <em>Agapanthus praecox</em>. Photo: Craig Franklin. License: CC BY-SA 3.0 au.<span class="credit-file">BCBG Agapanthus Praecox 04.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Dietes_grandiflora_or_Fairy_Iris.jpg" target="_blank" rel="noopener">Wild iris</a></span> <em>Dietes grandiflora</em>. Photo: Rojer Wisner. License: CC BY 2.0.<span class="credit-file">Dietes grandiflora or Fairy Iris.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Bush_Lily_(Clivia_miniata)_(32603733520).jpg" target="_blank" rel="noopener">Clivia</a></span> <em>Clivia miniata</em>. Photo: Bernard DUPONT from FRANCE. License: CC BY-SA 2.0.<span class="credit-file">Bush Lily (Clivia miniata) (32603733520).jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Themeda_triandra_-_kangaroo_grass.jpg" target="_blank" rel="noopener">Red grass</a></span> <em>Themeda triandra</em>. Photo: Peripitus. License: CC BY-SA 3.0.<span class="credit-file">Themeda triandra - kangaroo grass.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Calodendrum_capense.jpg" target="_blank" rel="noopener">Cape chestnut</a></span> <em>Calodendrum capense</em>. Photo: Melburnian. License: CC BY 2.5.<span class="credit-file">Calodendrum capense.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Dettaglio_-_Apocinaceae_Nerium_oleander_Lin._Erbario_Frizzi_Perugia_n._270.jpg" target="_blank" rel="noopener">Oleander</a></span> <em>Nerium oleander</em>. Photo: Giuseppe Frizzi. License: Public domain.<span class="credit-file">Dettaglio - Apocinaceae Nerium oleander Lin. Erbario Frizzi Perugia n. 270.jpg</span></li>
+      <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Brugmansia.jpg" target="_blank" rel="noopener">Angel&#39;s trumpet</a></span> <em>Brugmansia / Datura spp.</em>. Photo: Wikimedia Commons contributor. License: CC BY-SA 3.0.<span class="credit-file">Brugmansia.jpg</span></li>
+      <li class="extra-plant-credit"><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Pelargonium_%C3%97_hortorum_mixed.jpg" target="_blank" rel="noopener">Garden geranium</a></span> <em>Pelargonium x hortorum / Pelargonium hybrids</em>. Photo: Hardyplants. License: CC0.<span class="credit-file">Pelargonium &#215; hortorum mixed.jpg</span></li>
+      <li class="extra-plant-credit"><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_-_lavender_-_Lavendel_-_01.jpg" target="_blank" rel="noopener">Lavender</a></span> <em>Lavandula angustifolia</em>. Photo: Norbert Nagel. License: CC BY-SA 3.0.<span class="credit-file">Lavandula angustifolia - lavender - Lavendel - 01.jpg</span></li>
+      <li class="extra-plant-credit"><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Basil-Basilico-Ocimum_basilicum-albahaca.jpg" target="_blank" rel="noopener">Basil</a></span> <em>Ocimum basilicum / Ocimum spp.</em>. Photo: Castielli. License: CC BY-SA 3.0.<span class="credit-file">Basil-Basilico-Ocimum basilicum-albahaca.jpg</span></li>
+      <li class="extra-plant-credit"><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:YosriNov04Pokok_Serai.JPG" target="_blank" rel="noopener">Lemongrass</a></span> <em>Cymbopogon citratus</em>. Photo: Wikimedia Commons contributor. License: CC BY 2.0.<span class="credit-file">YosriNov04Pokok Serai.JPG</span></li>
+      <li class="extra-plant-credit"><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Leaves_of_Aloysia_citrodora.jpg" target="_blank" rel="noopener">Lemon verbena</a></span> <em>Aloysia citrodora</em>. Photo: ViajeroExtraviado. License: CC BY-SA 4.0.<span class="credit-file">Leaves of Aloysia citrodora.jpg</span></li>
+      <li class="extra-plant-credit"><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Gardenia_jasminoides_flower.jpg" target="_blank" rel="noopener">Gardenia</a></span> <em>Gardenia jasminoides</em>. Photo: Md Arif bd. License: CC BY-SA 4.0.<span class="credit-file">Gardenia jasminoides flower.jpg</span></li>
+      <li class="extra-plant-credit"><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Thymian_(Thymus_vulgaris),_Nationalpark_Hohe_Tauern.jpg" target="_blank" rel="noopener">Thyme</a></span> <em>Thymus vulgaris</em>. Photo: Naturpuur. License: CC BY 4.0.<span class="credit-file">Thymian (Thymus vulgaris), Nationalpark Hohe Tauern.jpg</span></li>
+    </ol>
+  </div>
+</section>
+
+<div class="select-dock" id="select-dock" role="region" aria-label="Selected plants" hidden>
+  <span class="sd-count"><strong id="select-count">0</strong> selected</span>
+  <button type="button" class="sd-print" id="print-selection">Print my list</button>
+  <button type="button" class="sd-clear" id="clear-selection">Clear</button>
+</div>
+
+<section id="shopping-list" aria-hidden="true">
+  <div class="sl-head">
+    <h2>My plant shopping list</h2>
+    <p class="sl-meta"><span id="sl-count"></span> · <span id="sl-date"></span> · Healing Garden, Pietermaritzburg</p>
+    <p class="sl-intro">Take this to the nursery. Note the quantity you need; “Look for” describes how to recognise each plant on the shelf.</p>
+  </div>
+  <div id="shopping-list-body"></div>
+</section>
+
+<footer>
+  <p class="disc">Medicinal, cultural and care notes are recorded for educational and signage purposes only — not medical advice, and not a suggestion to harvest, prepare or ingest any plant. Edible uses require correct identification, permission and supervision. Species such as agapanthus, clivia and all plants in the keep-out section are toxic if eaten and should be labelled accordingly. Plant data drawn from SANBI / PlantZAfrica and standard South African horticultural and ethnobotanical sources.</p>
+</footer>
+
+<script>
+(function(){
+  var legend = document.querySelector('.legend');
+  if(!legend) return;
+  var buttons = Array.prototype.slice.call(legend.querySelectorAll('button.tag'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('main .card'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main .section'));
+  var status = document.getElementById('filter-status');
+  var resetBtn = document.getElementById('filter-reset');
+  var searchInput = document.getElementById('plant-search');
+  var printBtn = document.getElementById('print-btn');
+  var noResults = document.getElementById('no-results');
+  if(!buttons.length || !cards.length) return;
+  var total = cards.length;
+
+  // Record each card's benefit tags and its searchable text (common, botanical, isiZulu names).
+  cards.forEach(function(card){
+    var set = {};
+    Array.prototype.forEach.call(card.querySelectorAll('.card-tags .tag'), function(t){
+      Array.prototype.forEach.call(t.classList, function(c){ if(c !== 'tag'){ set[c] = true; } });
+    });
+    card._tags = set;
+    var parts = [];
+    ['.common', '.botanical', '.zulu'].forEach(function(sel){
+      var el = card.querySelector(sel);
+      if(el){ parts.push(el.textContent); }
+    });
+    card._text = parts.join(' ').toLowerCase();
+  });
+
+  function active(){
+    return buttons.filter(function(b){ return b.getAttribute('aria-pressed') === 'true'; })
+                  .map(function(b){ return b.getAttribute('data-filter'); });
+  }
+
+  function apply(){
+    var on = active();
+    var q = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function(card){
+      var benefitMatch = on.length === 0 || on.some(function(f){ return card._tags[f]; });
+      var searchMatch = q === '' || card._text.indexOf(q) !== -1;
+      var match = benefitMatch && searchMatch;
+      card.classList.toggle('filtered-out', !match);
+      if(match){ shown++; }
+    });
+    sections.forEach(function(sec){
+      sec.classList.toggle('filtered-out', !sec.querySelector('.card:not(.filtered-out)'));
+    });
+    var filtering = on.length > 0 || q !== '';
+    if(noResults){ noResults.hidden = !(filtering && shown === 0); }
+    if(!filtering){
+      status.textContent = '';
+      resetBtn.hidden = true;
+    } else {
+      status.textContent = 'Showing ' + shown + ' of ' + total + ' plants';
+      resetBtn.hidden = false;
+    }
+  }
+
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      apply();
+    });
+  });
+  if(searchInput){ searchInput.addEventListener('input', apply); }
+  resetBtn.addEventListener('click', function(){
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', 'false'); });
+    if(searchInput){ searchInput.value = ''; searchInput.focus(); }
+    apply();
+  });
+  if(printBtn){ printBtn.addEventListener('click', function(){ window.print(); }); }
+})();
+
+// Gentle scroll-reveal — only when the browser supports it and the user hasn't
+// asked for reduced motion. Elements stay fully visible otherwise, so content
+// is never hidden if JS or IntersectionObserver is unavailable.
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  var els = Array.prototype.slice.call(document.querySelectorAll('main .card, main .section-head, .combo-card'));
+  if(!els.length) return;
+  els.forEach(function(el){ el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+  els.forEach(function(el){ io.observe(el); });
+})();
+
+// Plant selection → printable nursery shopping list.
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('main .card'));
+  var dock = document.getElementById('select-dock');
+  var countEl = document.getElementById('select-count');
+  var printBtn = document.getElementById('print-selection');
+  var clearBtn = document.getElementById('clear-selection');
+  var listBody = document.getElementById('shopping-list-body');
+  if(!cards.length || !dock || !listBody) return;
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main .section'));
+
+  // Add a "select" checkbox to every card — except toxic "Keep out" plants,
+  // which must never end up on a nursery shopping list.
+  cards.forEach(function(card){
+    if(card.classList.contains('danger') || card.closest('.section.avoid')){ return; }
+    var label = document.createElement('label');
+    label.className = 'select-toggle';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.setAttribute('aria-label', 'Add ' + textOf(card, '.common') + ' to my list');
+    var txt = document.createElement('span');
+    txt.textContent = 'Add to list';
+    label.appendChild(cb);
+    label.appendChild(txt);
+    var plate = card.querySelector('.plate');
+    if(plate){ plate.appendChild(label); }
+    card._cb = cb;
+    card._txt = txt;
+    cb.addEventListener('change', function(){
+      card.classList.toggle('selected', cb.checked);
+      txt.textContent = cb.checked ? 'Added ✓' : 'Add to list';
+      update();
+    });
+  });
+
+  // Add a "Select all / Deselect all" button to each section header.
+  sections.forEach(function(sec){
+    if(sec.classList.contains('avoid')){ return; }
+    var head = sec.querySelector('.section-head');
+    if(!head) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'section-select';
+    btn.textContent = 'Select all';
+    head.insertBefore(btn, head.querySelector('p'));
+    sec._selectBtn = btn;
+    btn.addEventListener('click', function(){
+      var secCards = visibleCards(sec);
+      var allSel = secCards.length && secCards.every(function(c){ return c._cb.checked; });
+      secCards.forEach(function(c){
+        c._cb.checked = !allSel;
+        c.classList.toggle('selected', !allSel);
+        c._txt.textContent = !allSel ? 'Added ✓' : 'Add to list';
+      });
+      update();
+    });
+  });
+
+  function textOf(card, sel){ var el = card.querySelector(sel); return el ? el.textContent.trim() : ''; }
+  function visibleCards(sec){
+    return Array.prototype.slice.call(sec.querySelectorAll('.card')).filter(function(c){ return !c.classList.contains('filtered-out'); });
+  }
+  function selected(){ return cards.filter(function(c){ return c._cb && c._cb.checked; }); }
+
+  function update(){
+    var n = selected().length;
+    countEl.textContent = n;
+    dock.hidden = n === 0;
+    sections.forEach(function(sec){
+      if(!sec._selectBtn) return;
+      var secCards = visibleCards(sec);
+      var allSel = secCards.length && secCards.every(function(c){ return c._cb.checked; });
+      sec._selectBtn.textContent = allSel ? 'Deselect all' : 'Select all';
+    });
+  }
+
+  function buildList(){
+    var sel = selected();
+    listBody.innerHTML = '';
+    var groups = {}, order = [];
+    sel.forEach(function(card){
+      var sec = card.closest('.section');
+      var h = sec ? sec.querySelector('.section-head h2') : null;
+      var name = h ? h.textContent.replace(/[❧❥❦]/g, '').trim() : 'Plants';
+      if(!groups[name]){ groups[name] = []; order.push(name); }
+      groups[name].push(card);
+    });
+    order.forEach(function(name){
+      var h3 = document.createElement('h3');
+      h3.className = 'sl-group';
+      h3.textContent = name;
+      listBody.appendChild(h3);
+      var ul = document.createElement('ul');
+      ul.className = 'sl-list';
+      groups[name].forEach(function(card){
+        var li = document.createElement('li');
+        li.className = 'sl-item';
+        var qty = document.createElement('span');
+        qty.className = 'sl-qty';
+        qty.textContent = 'Qty ____';
+        li.appendChild(qty);
+        var img = card.querySelector('.plate img');
+        if(img){
+          var thumb = document.createElement('img');
+          thumb.className = 'sl-thumb';
+          thumb.src = img.getAttribute('src');
+          thumb.alt = '';
+          li.appendChild(thumb);
+        }
+        var text = document.createElement('span');
+        text.className = 'sl-text';
+        var strong = document.createElement('strong');
+        strong.textContent = textOf(card, '.common');
+        var em = document.createElement('em');
+        em.textContent = textOf(card, '.botanical');
+        text.appendChild(strong);
+        text.appendChild(em);
+        var look = textOf(card, '.spotter');
+        if(look){
+          var lk = document.createElement('span');
+          lk.className = 'sl-look';
+          lk.textContent = look;
+          text.appendChild(lk);
+        }
+        li.appendChild(text);
+        ul.appendChild(li);
+      });
+      listBody.appendChild(ul);
+    });
+    var c = document.getElementById('sl-count');
+    if(c){ c.textContent = sel.length + ' plant' + (sel.length === 1 ? '' : 's'); }
+    var d = document.getElementById('sl-date');
+    if(d){ d.textContent = new Date().toLocaleDateString(); }
+  }
+
+  printBtn.addEventListener('click', function(){
+    if(!selected().length){ return; }
+    buildList();
+    document.body.classList.add('printing-list');
+    window.print();
+  });
+  window.addEventListener('afterprint', function(){ document.body.classList.remove('printing-list'); });
+
+  clearBtn.addEventListener('click', function(){
+    cards.forEach(function(c){
+      if(c._cb){ c._cb.checked = false; c.classList.remove('selected'); if(c._txt){ c._txt.textContent = 'Add to list'; } }
+    });
+    update();
+  });
+
+  update();
+})();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

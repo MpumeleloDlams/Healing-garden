@@ -9,8 +9,8 @@ photo credits.
 
 ## Viewing it
 
-Open `index.html` in any modern browser, or view the hosted version once
-GitHub Pages is enabled (Settings → Pages → Deploy from branch → `main` / root).
+Open `index.html` in any modern browser, or view the hosted version at:
+https://mpumelelodlams.github.io/Healing-garden/
 
 - `index.html` — the interactive catalogue
 - `healing_garden_images/` — plant photographs

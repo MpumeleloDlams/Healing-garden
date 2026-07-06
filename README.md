@@ -12,10 +12,11 @@ photo credits.
 Open `index.html` in any modern browser, or view the hosted version once
 GitHub Pages is enabled (Settings → Pages → Deploy from branch → `main` / root).
 
-- `index.html` — the interactive catalogue
+- `index.html` — the interactive catalogue (now with Dark Mode, Lightbox, and Advanced Search)
 - `healing_garden_images/` — plant photographs
 - `garden_combination_images/` — planting-combination boards
 - `Healing_Garden_Plant_Catalogue.pdf` — printable / navigable PDF version
+- `healing_garden_qr.png` — QR code for easy access to the live site
 
 Plant photographs are from Wikimedia Commons under their respective licences;
 see the "Photo credits" section in the catalogue for attribution.

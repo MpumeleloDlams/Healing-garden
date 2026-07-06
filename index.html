@@ -145,6 +145,12 @@
     margin:0 auto;
     padding:22px 40px 8px;
     display:flex;
+    flex-direction:column;
+    gap:14px;
+    align-items:flex-start;
+  }
+  .legend-row{
+    display:flex;
     flex-wrap:wrap;
     gap:8px 10px;
     align-items:center;
@@ -156,6 +162,7 @@
     text-transform:uppercase;
     color:var(--ink-soft);
     margin-right:6px;
+    min-width:70px;
   }
 
   .tag{
@@ -187,6 +194,12 @@
   .tag.taste::before{background:#7C9A4E;}
   .tag.medicinal::before{background:#5C7CA0;}
   .tag.shade::before{background:#4F6B52;}
+  .tag.sun-full::before{background:#E67E22;}
+  .tag.sun-semi::before{background:#F1C40F;}
+  .tag.sun-shade::before{background:#2C3E50;}
+  .tag.water-low::before{background:#AED6F1;}
+  .tag.water-mod::before{background:#3498DB;}
+  .tag.water-reg::before{background:#21618C;}
 
   /* ---------- Filter controls ---------- */
   button.tag{
@@ -982,19 +995,33 @@
   <button type="button" class="print-btn" id="print-btn">Print / Save as PDF</button>
 </section>
 
-<section class="legend" aria-label="Filter plants by benefit">
-  <span class="legend-label">Filter by benefit</span>
-  <button type="button" class="tag scent" data-filter="scent" aria-pressed="false">Scent / aromatherapy</button>
-  <button type="button" class="tag colour" data-filter="colour" aria-pressed="false">Calming colour</button>
-  <button type="button" class="tag movement" data-filter="movement" aria-pressed="false">Movement &amp; sound</button>
-  <button type="button" class="tag touch" data-filter="touch" aria-pressed="false">Touch</button>
-  <button type="button" class="tag taste" data-filter="taste" aria-pressed="false">Labelled edible part</button>
-  <button type="button" class="tag birds" data-filter="birds" aria-pressed="false">Attracts birds</button>
-  <button type="button" class="tag butterfly" data-filter="butterfly" aria-pressed="false">Attracts butterflies</button>
-  <button type="button" class="tag medicinal" data-filter="medicinal" aria-pressed="false">Medicinal heritage</button>
-  <button type="button" class="tag shade" data-filter="shade" aria-pressed="false">Shade / shelter</button>
-  <button type="button" class="filter-reset" id="filter-reset" hidden>Show all</button>
-  <span class="filter-status" id="filter-status" role="status" aria-live="polite"></span>
+<section class="legend" aria-label="Advanced filtering">
+  <div class="legend-row">
+    <span class="legend-label">Benefit</span>
+    <button type="button" class="tag scent" data-filter="scent" data-category="benefit" aria-pressed="false">Scent</button>
+    <button type="button" class="tag colour" data-filter="colour" data-category="benefit" aria-pressed="false">Colour</button>
+    <button type="button" class="tag movement" data-filter="movement" data-category="benefit" aria-pressed="false">Movement</button>
+    <button type="button" class="tag touch" data-filter="touch" data-category="benefit" aria-pressed="false">Touch</button>
+    <button type="button" class="tag taste" data-filter="taste" data-category="benefit" aria-pressed="false">Edible</button>
+    <button type="button" class="tag birds" data-filter="birds" data-category="benefit" aria-pressed="false">Birds</button>
+    <button type="button" class="tag butterfly" data-filter="butterfly" data-category="benefit" aria-pressed="false">Pollinators</button>
+    <button type="button" class="tag medicinal" data-filter="medicinal" data-category="benefit" aria-pressed="false">Medicinal</button>
+    <button type="button" class="tag shade" data-filter="shade" data-category="benefit" aria-pressed="false">Shade</button>
+  </div>
+  <div class="legend-row">
+    <span class="legend-label">Sun</span>
+    <button type="button" class="tag sun-full" data-filter="sun-full" data-category="sun" aria-pressed="false">Full Sun</button>
+    <button type="button" class="tag sun-semi" data-filter="sun-semi" data-category="sun" aria-pressed="false">Semi-shade</button>
+    <button type="button" class="tag sun-shade" data-filter="sun-shade" data-category="sun" aria-pressed="false">Shade</button>
+  </div>
+  <div class="legend-row">
+    <span class="legend-label">Water</span>
+    <button type="button" class="tag water-low" data-filter="water-low" data-category="water" aria-pressed="false">Low</button>
+    <button type="button" class="tag water-mod" data-filter="water-mod" data-category="water" aria-pressed="false">Moderate</button>
+    <button type="button" class="tag water-reg" data-filter="water-reg" data-category="water" aria-pressed="false">Regular</button>
+    <button type="button" class="filter-reset" id="filter-reset" hidden>Show all</button>
+    <span class="filter-status" id="filter-status" role="status" aria-live="polite"></span>
+  </div>
 </section>
 <p class="filter-hint">Tap one or more benefits to show only the plants that offer them. Tap again to clear, or use “Show all”.</p>
 <p class="no-results" id="no-results" role="status" aria-live="polite" hidden>No plants match that search. Try a different name, or use “Show all” to reset.</p>
@@ -1018,7 +1045,7 @@
           <p class="spotter"><span>Look for:</span> soft, fuzzy leaves with a peppermint scent when gently touched.</p>
           <p class="care"><span>Care:</span> Semi-shade, moist but well-drained soil; water at soil level and trim leggy stems.</p>
           <p class="benefit">Soft, velvety leaves release a cool peppermint scent on touch — an invitation to slow down and engage the senses.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag touch">Touch</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag touch">Touch</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1030,7 +1057,7 @@
           <p class="spotter"><span>Look for:</span> silvery, fine foliage and small white flower heads.</p>
           <p class="care"><span>Care:</span> Full sun and sharp drainage; water to establish, then let soil dry between deep waterings.</p>
           <p class="benefit">Silvery aromatic foliage that's grounding and water-wise; the resinous scent settles the mind.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag touch">Touch</span><span class="tag medicinal">Medicinal</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag touch">Touch</span><span class="tag medicinal">Medicinal</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span></div>
         </div>
       </article>
 
@@ -1042,7 +1069,7 @@
           <p class="spotter"><span>Look for:</span> aromatic leaves, pale bark and warm bronze autumn colour.</p>
           <p class="care"><span>Care:</span> Sunny to light shade; moderate summer water, mulch, and protect young trees from cold wind.</p>
           <p class="benefit">Crushed leaves smell of lavender — a sleep-and-calm associated scent — with warm autumn colour for year-round interest.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag shade">Shade</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag shade">Shade</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1054,7 +1081,7 @@
           <p class="spotter"><span>Look for:</span> glossy leaves and starry white, sweetly scented flowers.</p>
           <p class="care"><span>Care:</span> Well-drained composted soil; avoid overwatering and prune after flowering to shape.</p>
           <p class="benefit">Sweetly perfumed white flowers over an arbour create a memorable, mood-lifting "scent destination" — lovely in the evening.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1066,7 +1093,7 @@
           <p class="spotter"><span>Look for:</span> rounded, softly scented leaves and bright clusters of pink, red, white or purple flowers.</p>
           <p class="care"><span>Care:</span> Full sun to light shade, well-drained soil, regular deadheading and careful watering at the roots.</p>
           <p class="benefit">Colourful flowers lift the mood, while many scented-leaf varieties add a gentle touch-and-smell experience for path edges and containers.</p>
-          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag scent">Scent</span><span class="tag touch">Touch</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag scent">Scent</span><span class="tag touch">Touch</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1078,7 +1105,7 @@
           <p class="spotter"><span>Look for:</span> narrow grey-green leaves and upright purple flower spikes with a strong calming scent.</p>
           <p class="care"><span>Care:</span> Full sun, excellent drainage, light feeding and pruning after flowering to prevent woody growth.</p>
           <p class="benefit">The purple flowers and familiar fragrance are strongly associated with calm, rest and sensory grounding.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag butterfly">Pollinators</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag butterfly">Pollinators</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1090,7 +1117,7 @@
           <p class="spotter"><span>Look for:</span> soft, fragrant green leaves; annual sweet basil is tender, while some African basils become shrubby.</p>
           <p class="care"><span>Care:</span> Morning sun, rich soil, steady water and frequent tip-pinching for leafy growth.</p>
           <p class="benefit">A familiar culinary herb with uplifting fragrance; flowering African basils also bring bees and gentle movement into the garden.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag butterfly">Pollinators</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag butterfly">Pollinators</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span><span class="tag water-reg">Regular</span></div>
         </div>
       </article>
 
@@ -1102,7 +1129,7 @@
           <p class="spotter"><span>Look for:</span> tall arching grass blades that release a strong lemon scent when rubbed.</p>
           <p class="care"><span>Care:</span> Full sun, compost-rich soil, regular summer water and annual cutting back of old leaves.</p>
           <p class="benefit">Tall scented foliage adds movement, sound and a useful lemon note for tea or culinary interpretation.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag movement">Movement</span><span class="tag taste">Edible part</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag movement">Movement</span><span class="tag taste">Edible part</span><span class="tag sun-full">Full Sun</span><span class="tag water-mod">Moderate</span><span class="tag water-reg">Regular</span></div>
         </div>
       </article>
 
@@ -1114,7 +1141,7 @@
           <p class="spotter"><span>Look for:</span> narrow, slightly rough leaves with an intense lemon fragrance when crushed.</p>
           <p class="care"><span>Care:</span> Warm sun, well-drained soil, moderate water and pruning to keep a leafy shrub shape.</p>
           <p class="benefit">Its clean lemon scent is immediate and memorable, making it a useful stop for sensory signage and supervised tea-garden interpretation.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag touch">Touch</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag touch">Touch</span><span class="tag sun-full">Full Sun</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1126,7 +1153,7 @@
           <p class="spotter"><span>Look for:</span> glossy dark leaves and creamy white flowers with a rich sweet perfume.</p>
           <p class="care"><span>Care:</span> Bright filtered light or morning sun, acidic composted soil, mulch and consistent moisture.</p>
           <p class="benefit">The white flowers and strong perfume create a quiet, elegant scent moment near seating areas or entrances.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag touch">Glossy leaves</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag colour">Colour</span><span class="tag touch">Touch</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1138,7 +1165,7 @@
           <p class="spotter"><span>Look for:</span> tiny aromatic leaves on low woody stems, often forming a soft ground-covering mat.</p>
           <p class="care"><span>Care:</span> Full sun, lean gritty soil, little water and light trimming after flowering.</p>
           <p class="benefit">Low, aromatic foliage works well along edges where touch and scent can be noticed without blocking views.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag touch">Touch</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag touch">Touch</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span></div>
         </div>
       </article>
 </div>
@@ -1162,7 +1189,7 @@
           <p class="spotter"><span>Look for:</span> soft grey, finely divided leaves with a sharp herbal scent.</p>
           <p class="care"><span>Care:</span> Full sun, good drainage and a hard winter prune for fresh spring growth.</p>
           <p class="benefit">One of South Africa's most-used traditional medicines (colds, fevers, coughs); soft silver foliage and a clean, clarifying aroma.</p>
-          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag scent">Scent</span><span class="tag touch">Touch</span></div>
+          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag scent">Scent</span><span class="tag touch">Touch</span><span class="tag sun-full">Full Sun</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1175,7 +1202,7 @@
           <p class="spotter"><span>Look for:</span> narrow garlic-scented leaves and mauve star-shaped flowers.</p>
           <p class="care"><span>Care:</span> Full sun to partial shade; regular summer water for flowers, then divide crowded clumps.</p>
           <p class="benefit">Long-lasting mauve flowers and a bee-and-butterfly draw; traditionally associated with colds and flu; the garlic-scented leaves need clear labelling and supervised use.</p>
-          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Butterflies</span><span class="tag medicinal">Medicinal</span><span class="tag taste">Edible part</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Pollinators</span><span class="tag medicinal">Medicinal</span><span class="tag taste">Edible part</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1187,7 +1214,7 @@
           <p class="spotter"><span>Look for:</span> succulent green leaves and yellow-orange flower spikes.</p>
           <p class="care"><span>Care:</span> Full sun, free-draining composted soil; water sparingly once established and deadhead.</p>
           <p class="benefit">Cheerful orange-yellow flowers almost year-round; its leaf gel is a classic first-aid remedy for burns, bites and grazes.</p>
-          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag medicinal">Medicinal</span><span class="tag butterfly">Pollinators</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag medicinal">Medicinal</span><span class="tag butterfly">Pollinators</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-low">Low water</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1199,7 +1226,7 @@
           <p class="spotter"><span>Look for:</span> red pea-like flowers followed by inflated papery pods.</p>
           <p class="care"><span>Care:</span> Full sun and very free drainage; little water, no overwatering, replace older plants.</p>
           <p class="benefit">A revered traditional tonic and immune plant; red flowers and inflated papery pods make it a story-rich specimen.</p>
-          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span></div>
         </div>
       </article>
 
@@ -1211,7 +1238,7 @@
           <p class="spotter"><span>Look for:</span> branching rosettes and upright orange-red winter flower candles.</p>
           <p class="care"><span>Care:</span> Full sun, gritty drainage and deep infrequent watering; keep roots dry in winter.</p>
           <p class="benefit">Bold sculptural form with winter nectar that brings sunbirds in close; leaf gel soothes burns and skin.</p>
-          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag birds">Birds</span><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag medicinal">Medicinal</span><span class="tag birds">Birds</span><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span></div>
         </div>
       </article>
 
@@ -1235,7 +1262,7 @@
           <p class="spotter"><span>Look for:</span> glossy hedge growth and orange tubular flowers.</p>
           <p class="care"><span>Care:</span> Sun or semi-shade; water weekly while establishing and prune hard to control shape.</p>
           <p class="benefit">Orange-red tubular flowers reliably pull in sunbirds — fast colour and life for a focal bed.</p>
-          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1247,7 +1274,7 @@
           <p class="spotter"><span>Look for:</span> tall stems with orange flower whorls around the stem.</p>
           <p class="care"><span>Care:</span> Full sun, compost and growing-season water; cut back after flowering for strong regrowth.</p>
           <p class="benefit">Tall orange flower whorls bring sunbirds and strong vertical structure; traditionally a calming remedy.</p>
-          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag medicinal">Medicinal</span><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag medicinal">Medicinal</span><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1259,7 +1286,7 @@
           <p class="spotter"><span>Look for:</span> small tree form, orange-red tube flowers and dark fruit.</p>
           <p class="care"><span>Care:</span> Nutrient-rich loam and steady water while young; protect young trees from frost.</p>
           <p class="benefit">Locally native; nectar flowers feed sunbirds and the fruit feeds many birds — a living, animated, water-wise tree.</p>
-          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag shade">Shade</span></div>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag shade">Shade</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag sun-shade">Shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1271,7 +1298,7 @@
           <p class="spotter"><span>Look for:</span> paddle-shaped leaves and orange-blue bird-like blooms.</p>
           <p class="care"><span>Care:</span> Sun to light shade, composted soil and regular summer water; do not disturb clumps often.</p>
           <p class="benefit">Iconic sculptural "bird" blooms double as sunbird nectar — a strong, exotic visual anchor.</p>
-          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag birds">Birds</span><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1283,7 +1310,7 @@
           <p class="spotter"><span>Look for:</span> glossy thorny hedge, white star flowers and red plum-like fruit.</p>
           <p class="care"><span>Care:</span> Sun to semi-shade; deep water until established, then prune as a dense hedge.</p>
           <p class="benefit">Fragrant white flowers, glossy leaves and edible red fruit — a multi-sensory hedge that feeds birds and offers a recognisable edible fruit when correctly identified and supervised.</p>
-          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag birds">Birds</span></div>
+          <div class="card-tags"><span class="tag scent">Scent</span><span class="tag taste">Edible part</span><span class="tag birds">Birds</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1307,7 +1334,7 @@
           <p class="spotter"><span>Look for:</span> oval leaves, orange split fruit and a light shade-tree canopy.</p>
           <p class="care"><span>Care:</span> Sun or light shade; moderate water when young and leave caterpillars as part of the ecology.</p>
           <p class="benefit">Host tree for the garden acraea butterfly, so it guarantees butterflies — and the birds that follow them; fine shade too.</p>
-          <div class="card-tags"><span class="tag butterfly">Butterflies</span><span class="tag birds">Birds</span><span class="tag shade">Shade</span></div>
+          <div class="card-tags"><span class="tag butterfly">Pollinators</span><span class="tag birds">Birds</span><span class="tag shade">Shade</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1319,7 +1346,7 @@
           <p class="spotter"><span>Look for:</span> grey-green wrinkled leaves and lilac honey-scented flower sprays.</p>
           <p class="care"><span>Care:</span> Full sun, good drainage and a prune after flowering to keep it compact.</p>
           <p class="benefit">Honey-scented lilac flower trusses that hum with butterflies and bees — scent, sound and movement together.</p>
-          <div class="card-tags"><span class="tag butterfly">Butterflies</span><span class="tag scent">Scent</span><span class="tag movement">Sound</span></div>
+          <div class="card-tags"><span class="tag butterfly">Pollinators</span><span class="tag scent">Scent</span><span class="tag movement">Movement</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1331,7 +1358,7 @@
           <p class="spotter"><span>Look for:</span> low mounding growth with soft mauve-blue flowers.</p>
           <p class="care"><span>Care:</span> Sun to semi-shade; prune after autumn flowering and pinch tips for more bloom.</p>
           <p class="benefit">A froth of soft mauve-blue autumn flowers — a calming colour wash and a butterfly draw when colour is most welcome.</p>
-          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Butterflies</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Pollinators</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1343,7 +1370,7 @@
           <p class="spotter"><span>Look for:</span> pale blue flower clusters and a loose scrambling habit.</p>
           <p class="care"><span>Care:</span> Sun to semi-shade; compost, moderate water and regular cutting back to control spread.</p>
           <p class="benefit">Soft sky-blue flowers — among the most soothing colours available — host blue butterflies and shelter small birds.</p>
-          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Butterflies</span><span class="tag birds">Birds</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag butterfly">Pollinators</span><span class="tag birds">Birds</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1367,7 +1394,7 @@
           <p class="spotter"><span>Look for:</span> strap leaves and tall blue or white flower spheres.</p>
           <p class="care"><span>Care:</span> Full sun, compost-rich drainage and weekly deep spring-summer watering for best flowers.</p>
           <p class="benefit">Blue-and-white flower globes are among the most calming in the palette; mass plantings read as serene and orderly. <em>(Toxic if eaten — label.)</em></p>
-          <div class="card-tags"><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span><span class="tag water-reg">Regular</span></div>
         </div>
       </article>
 
@@ -1379,7 +1406,7 @@
           <p class="spotter"><span>Look for:</span> sword-like leaves and white flowers with mauve-yellow markings.</p>
           <p class="care"><span>Care:</span> Full sun or light shade; composted soil and good summer water for maximum flowering.</p>
           <p class="benefit">Elegant white-and-mauve blooms on swaying stems; evergreen and serene — a low-effort calming anchor.</p>
-          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag movement">Movement</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag movement">Movement</span><span class="tag sun-full">Full Sun</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1391,7 +1418,7 @@
           <p class="spotter"><span>Look for:</span> dark strap leaves and orange trumpets in shade.</p>
           <p class="care"><span>Care:</span> Dappled shade, compost mulch and summer water; reduce watering in winter.</p>
           <p class="benefit">Glowing orange flowers that bring warmth and life to deep shade — turning dark corners into welcoming refuges. <em>(Toxic if eaten — label.)</em></p>
-          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag shade">Shade-lover</span></div>
+          <div class="card-tags"><span class="tag colour">Colour</span><span class="tag shade">Shade</span><span class="tag sun-shade">Shade</span><span class="tag water-reg">Regular</span></div>
         </div>
       </article>
 
@@ -1403,7 +1430,7 @@
           <p class="spotter"><span>Look for:</span> fine seed heads and copper-red colour in dry months.</p>
           <p class="care"><span>Care:</span> Full sun, lean soil and first-year water; cut old seed heads late winter.</p>
           <p class="benefit">The garden's movement-and-sound layer — sways, rustles and catches low light, and feeds seed-eating birds. Native to the local veld.</p>
-          <div class="card-tags"><span class="tag movement">Movement</span><span class="tag birds">Birds</span></div>
+          <div class="card-tags"><span class="tag movement">Movement</span><span class="tag birds">Birds</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span></div>
         </div>
       </article>
 
@@ -1427,7 +1454,7 @@
           <p class="spotter"><span>Look for:</span> glossy leaves and clouds of pink spring blossom.</p>
           <p class="care"><span>Care:</span> Warm sun, deep composted soil and plenty of spring-summer water while young.</p>
           <p class="benefit">Clouds of fragrant pink spring blossom (an uplifting seasonal event), generous dappled shade for rest, and a butterfly draw.</p>
-          <div class="card-tags"><span class="tag shade">Shade</span><span class="tag scent">Scent</span><span class="tag butterfly">Butterflies</span><span class="tag colour">Colour</span></div>
+          <div class="card-tags"><span class="tag shade">Shade</span><span class="tag scent">Scent</span><span class="tag butterfly">Pollinators</span><span class="tag colour">Colour</span><span class="tag sun-full">Full Sun</span><span class="tag water-mod">Moderate</span><span class="tag water-reg">Regular</span></div>
         </div>
       </article>
 
@@ -1451,7 +1478,7 @@
           <p class="spotter"><span>Look for:</span> narrow leathery leaves and showy pink, white or red flowers; remove on sight.</p>
           <p class="care"><span>Care:</span> Do not plant; remove with gloves, bag waste, and never burn or compost trimmings.</p>
           <p class="benefit">Every part is highly poisonous and it's also a declared invasive in South Africa. Exclude entirely.</p>
-          <div class="card-tags"><span class="tag">Do not plant</span></div>
+          <div class="card-tags"><span class="tag">Do not plant</span><span class="tag sun-full">Full Sun</span><span class="tag water-low">Low water</span></div>
         </div>
       </article>
 
@@ -1463,7 +1490,7 @@
           <p class="spotter"><span>Look for:</span> large hanging trumpet flowers and soft broad leaves; remove on sight.</p>
           <p class="care"><span>Care:</span> Do not plant; remove with protective clothing and keep all plant parts away from children.</p>
           <p class="benefit">All parts highly toxic and hallucinogenic — a frequent cause of poisoning. Keep out, especially anywhere children visit.</p>
-          <div class="card-tags"><span class="tag">Do not plant</span></div>
+          <div class="card-tags"><span class="tag">Do not plant</span><span class="tag sun-semi">Semi-shade</span><span class="tag water-mod">Moderate</span></div>
         </div>
       </article>
 
@@ -1673,7 +1700,16 @@
   cards.forEach(function(card){
     var set = {};
     Array.prototype.forEach.call(card.querySelectorAll('.card-tags .tag'), function(t){
-      Array.prototype.forEach.call(t.classList, function(c){ if(c !== 'tag'){ set[c] = true; } });
+      // Special handling for multi-word tags or specifically coded tags
+      var classes = Array.prototype.slice.call(t.classList);
+      classes.forEach(function(c){
+        if(c !== 'tag'){
+            set[c] = true;
+        }
+      });
+      // Fallback: also index by text content for tags like "Full Sun" -> "sun-full" if needed,
+      // but we've used classes like .sun-full already.
+      // Let's ensure we catch everything in .card-tags .tag
     });
     card._tags = set;
     var parts = [];
@@ -1684,26 +1720,41 @@
     card._text = parts.join(' ').toLowerCase();
   });
 
-  function active(){
-    return buttons.filter(function(b){ return b.getAttribute('aria-pressed') === 'true'; })
-                  .map(function(b){ return b.getAttribute('data-filter'); });
-  }
-
   function apply(){
-    var on = active();
+    var activeFilters = buttons.filter(function(b){ return b.getAttribute('aria-pressed') === 'true'; })
+                        .map(function(b){
+                          return { filter: b.getAttribute('data-filter'), category: b.getAttribute('data-category') };
+                        });
+
+    var categories = {};
+    activeFilters.forEach(function(f) {
+        if (!categories[f.category]) categories[f.category] = [];
+        categories[f.category].push(f.filter);
+    });
+
     var q = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
     var shown = 0;
+
     cards.forEach(function(card){
-      var benefitMatch = on.length === 0 || on.some(function(f){ return card._tags[f]; });
+      var match = true;
+
+      // Category matches: AND between categories, OR within
+      Object.keys(categories).forEach(function(cat) {
+          var filters = categories[cat];
+          var catMatch = filters.some(function(f) { return card._tags[f]; });
+          if (!catMatch) match = false;
+      });
+
       var searchMatch = q === '' || card._text.indexOf(q) !== -1;
-      var match = benefitMatch && searchMatch;
+      if (!searchMatch) match = false;
+
       card.classList.toggle('filtered-out', !match);
       if(match){ shown++; }
     });
     sections.forEach(function(sec){
       sec.classList.toggle('filtered-out', !sec.querySelector('.card:not(.filtered-out)'));
     });
-    var filtering = on.length > 0 || q !== '';
+    var filtering = activeFilters.length > 0 || q !== '';
     if(noResults){ noResults.hidden = !(filtering && shown === 0); }
     if(!filtering){
       status.textContent = '';

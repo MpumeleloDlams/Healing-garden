@@ -845,7 +845,10 @@
   .select-dock[hidden]{ display:none; }
   .sd-count{ font-family:'Fraunces',serif; font-size:.9rem; color:var(--ink); white-space:nowrap; }
   .sd-count strong{ font-weight:600; }
-  .sd-print,.sd-clear{ font-family:'Fraunces',serif; font-size:.78rem; cursor:pointer; border-radius:999px; padding:8px 15px; white-space:nowrap; }
+  .sd-download,.sd-print,.sd-clear{ font-family:'Fraunces',serif; font-size:.78rem; cursor:pointer; border-radius:999px; padding:8px 15px; white-space:nowrap; }
+  .sd-download{ color:#fff; background:linear-gradient(180deg,#5f96ab,var(--calm)); border:1px solid var(--calm); box-shadow:inset 0 1px 0 rgba(255,255,255,.3); }
+  .sd-download:hover,.sd-download:focus-visible{ background:var(--calm); outline:none; }
+  .sd-download[aria-busy="true"]{ opacity:.65; cursor:progress; }
   .sd-print{ color:#fff; background:linear-gradient(180deg,#9a86ad,var(--mauve)); border:1px solid var(--mauve); box-shadow:inset 0 1px 0 rgba(255,255,255,.3); }
   .sd-print:hover,.sd-print:focus-visible{ background:var(--mauve); outline:none; }
   .sd-clear{ color:var(--ink-soft); background:transparent; border:1px solid var(--sage-line); }
@@ -1647,6 +1650,7 @@
 
 <div class="select-dock" id="select-dock" role="region" aria-label="Selected plants" hidden>
   <span class="sd-count"><strong id="select-count">0</strong> selected</span>
+  <button type="button" class="sd-download" id="download-selection">Download PDF</button>
   <button type="button" class="sd-print" id="print-selection">Print my list</button>
   <button type="button" class="sd-clear" id="clear-selection">Clear</button>
 </div>
@@ -1761,6 +1765,7 @@
   var cards = Array.prototype.slice.call(document.querySelectorAll('main .card'));
   var dock = document.getElementById('select-dock');
   var countEl = document.getElementById('select-count');
+  var downloadBtn = document.getElementById('download-selection');
   var printBtn = document.getElementById('print-selection');
   var clearBtn = document.getElementById('clear-selection');
   var listBody = document.getElementById('shopping-list-body');
@@ -1820,6 +1825,22 @@
   }
   function selected(){ return cards.filter(function(c){ return c._cb && c._cb.checked; }); }
 
+  // Groups the currently-selected cards by their catalogue section, in the
+  // order those sections first appear among the selection. Shared by the
+  // on-screen printable list and the combined PDF download below.
+  function groupSelected(){
+    var sel = selected();
+    var groups = {}, order = [];
+    sel.forEach(function(card){
+      var sec = card.closest('.section');
+      var h = sec ? sec.querySelector('.section-head h2') : null;
+      var name = h ? h.textContent.replace(/[❧❥❦]/g, '').trim() : 'Plants';
+      if(!groups[name]){ groups[name] = []; order.push(name); }
+      groups[name].push(card);
+    });
+    return { groups: groups, order: order, count: sel.length };
+  }
+
   function update(){
     var n = selected().length;
     countEl.textContent = n;
@@ -1833,16 +1854,9 @@
   }
 
   function buildList(){
-    var sel = selected();
+    var grouped = groupSelected();
+    var groups = grouped.groups, order = grouped.order, sel = selected();
     listBody.innerHTML = '';
-    var groups = {}, order = [];
-    sel.forEach(function(card){
-      var sec = card.closest('.section');
-      var h = sec ? sec.querySelector('.section-head h2') : null;
-      var name = h ? h.textContent.replace(/[❧❥❦]/g, '').trim() : 'Plants';
-      if(!groups[name]){ groups[name] = []; order.push(name); }
-      groups[name].push(card);
-    });
     order.forEach(function(name){
       var h3 = document.createElement('h3');
       h3.className = 'sl-group';
@@ -1898,6 +1912,134 @@
     window.print();
   });
   window.addEventListener('afterprint', function(){ document.body.classList.remove('printing-list'); });
+
+  // Download the selected plants as ONE combined PDF (never one file per
+  // plant, however many are selected) — loads a small PDF-drawing library
+  // on first use only, so the page doesn't pay for it until needed.
+  var JSPDF_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+  function loadJsPDF(cb, onerror){
+    if(window.jspdf && window.jspdf.jsPDF){ cb(); return; }
+    var existing = document.getElementById('jspdf-cdn');
+    if(existing){ existing.addEventListener('load', cb); existing.addEventListener('error', onerror); return; }
+    var s = document.createElement('script');
+    s.id = 'jspdf-cdn';
+    s.src = JSPDF_SRC;
+    s.onload = cb;
+    s.onerror = onerror;
+    document.head.appendChild(s);
+  }
+
+  // Draws a loaded <img> onto a canvas to get a PDF-embeddable data URL.
+  // Returns null (never throws) if the image isn't ready or can't be read,
+  // so a missing thumbnail just means one fewer picture — not a crash.
+  function imgToDataURL(img){
+    if(!img || !img.complete || !img.naturalWidth){ return null; }
+    try{
+      var maxW = 320;
+      var scale = Math.min(1, maxW / img.naturalWidth);
+      var canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL('image/jpeg', 0.82);
+    }catch(e){ return null; }
+  }
+
+  function buildSelectionPdf(){
+    var grouped = groupSelected();
+    if(!grouped.count) return;
+    var JsPDF = window.jspdf.jsPDF;
+    var doc = new JsPDF({ unit: 'mm', format: 'a4' });
+    var pageW = 210, pageH = 297, margin = 16, maxY = pageH - margin;
+    var y = margin;
+
+    function ensureSpace(h){
+      if(y + h > maxY){ doc.addPage(); y = margin; }
+    }
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(18); doc.setTextColor(20, 30, 28);
+    doc.text('My plant shopping list', margin, y); y += 8;
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90, 90, 90);
+    var meta = grouped.count + ' plant' + (grouped.count === 1 ? '' : 's') + '  ·  ' +
+      new Date().toLocaleDateString() + '  ·  Healing Garden, Pietermaritzburg';
+    doc.text(meta, margin, y); y += 6;
+
+    doc.setFontSize(9); doc.setTextColor(120, 120, 120);
+    var introLines = doc.splitTextToSize(
+      'Take this to the nursery. Note the quantity you need; "Look for" describes how to recognise each plant on the shelf.',
+      pageW - margin * 2
+    );
+    doc.text(introLines, margin, y);
+    y += introLines.length * 4.2 + 5;
+
+    grouped.order.forEach(function(name){
+      ensureSpace(12);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(13); doc.setTextColor(20, 30, 28);
+      doc.text(name, margin, y);
+      doc.setDrawColor(160, 160, 160);
+      doc.line(margin, y + 1.6, pageW - margin, y + 1.6);
+      y += 8;
+
+      grouped.groups[name].forEach(function(card){
+        var rowH = 24;
+        ensureSpace(rowH);
+
+        doc.setDrawColor(60, 60, 60);
+        doc.rect(margin, y, 17, 7.5);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(60, 60, 60);
+        doc.text('Qty ___', margin + 1.5, y + 5.1);
+
+        var textX = margin + 21;
+        var thumb = imgToDataURL(card.querySelector('.plate img'));
+        if(thumb){
+          try{
+            doc.addImage(thumb, 'JPEG', margin + 19, y, 22, 17);
+            textX = margin + 19 + 22 + 4;
+          }catch(e){ /* skip thumbnail if the format can't be embedded */ }
+        }
+
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(20, 30, 28);
+        doc.text(textOf(card, '.common'), textX, y + 5);
+        doc.setFont('helvetica', 'italic'); doc.setFontSize(9.5); doc.setTextColor(110, 95, 130);
+        doc.text(textOf(card, '.botanical'), textX, y + 10);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8.3); doc.setTextColor(70, 70, 70);
+        var look = textOf(card, '.spotter');
+        if(look){
+          var lookLines = doc.splitTextToSize(look, pageW - margin - textX);
+          doc.text(lookLines.slice(0, 2), textX, y + 15);
+        }
+
+        doc.setDrawColor(215, 220, 210);
+        doc.line(margin, y + rowH - 2, pageW - margin, y + rowH - 2);
+        y += rowH;
+      });
+      y += 4;
+    });
+
+    doc.save('My_Plant_Shopping_List.pdf');
+  }
+
+  if(downloadBtn){
+    downloadBtn.addEventListener('click', function(){
+      if(!selected().length || downloadBtn.getAttribute('aria-busy') === 'true'){ return; }
+      downloadBtn.setAttribute('aria-busy', 'true');
+      var originalLabel = downloadBtn.textContent;
+      downloadBtn.textContent = 'Preparing…';
+      loadJsPDF(
+        function(){
+          try{ buildSelectionPdf(); }
+          catch(e){ alert('Sorry, something went wrong building the PDF. Please try again.'); }
+          finally{ downloadBtn.removeAttribute('aria-busy'); downloadBtn.textContent = originalLabel; }
+        },
+        function(){
+          alert('Could not load the PDF tool. Check your internet connection and try again.');
+          downloadBtn.removeAttribute('aria-busy'); downloadBtn.textContent = originalLabel;
+        }
+      );
+    });
+  }
 
   clearBtn.addEventListener('click', function(){
     cards.forEach(function(c){

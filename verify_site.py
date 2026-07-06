@@ -43,10 +43,13 @@ def run_verification(page, target_url):
         });
     }""")
 
+    success = True
+
     if missing_images:
         print("Missing/Failed images for plants:")
         for plant in missing_images:
             print(f"  - {plant}")
+        success = False
     else:
         print("All plant images loaded successfully (no placeholders visible).")
 
@@ -54,6 +57,7 @@ def run_verification(page, target_url):
         print("Failed requests:")
         for url in failed_requests:
             print(f"  - {url}")
+        success = False
     else:
         print("No failed network requests.")
 
@@ -62,6 +66,8 @@ def run_verification(page, target_url):
     screenshot_path = "verification/screenshots/verification.png"
     page.screenshot(path=screenshot_path, full_page=True)
     print(f"Screenshot saved to {screenshot_path}")
+
+    return success
 
 if __name__ == "__main__":
     # Default to local index.html if no URL provided
@@ -79,7 +85,9 @@ if __name__ == "__main__":
         )
         page = context.new_page()
         try:
-            run_verification(page, target)
+            is_successful = run_verification(page, target)
+            if not is_successful:
+                sys.exit(1)
         finally:
             context.close()
             browser.close()

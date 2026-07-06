@@ -38,6 +38,26 @@
     --sunbird:#C16A33;    /* warm nectar-orange, used sparingly for bird plants */
     --warn:#9A4636;
     --frame:#D2DAD6;
+    --glass-bg: rgba(255, 255, 255, 0.42);
+    --glass-border: rgba(255, 255, 255, 0.55);
+    --shadow-tint: rgba(35, 48, 42, 0.5);
+  }
+
+  [data-theme="dark"] {
+    --ink:#E1E9E7;
+    --ink-soft:#BCCAC6;
+    --paper:#1A2321;
+    --card:#242D2B;
+    --sage:#A8B998;
+    --sage-line:#3D4D48;
+    --calm:#6DA2BA;
+    --mauve:#9E8CB2;
+    --sunbird:#D68652;
+    --warn:#BC5B49;
+    --frame:#2F3A38;
+    --glass-bg: rgba(0, 0, 0, 0.35);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow-tint: rgba(0, 0, 0, 0.8);
   }
 
   *{box-sizing:border-box;}
@@ -269,7 +289,7 @@
     gap:12px;
     align-items:center;
   }
-  .search-wrap{ position:relative; flex:1 1 260px; }
+  .search-wrap{ position:relative; flex:1 1 260px; display: flex; align-items: center; }
   .search-input{
     width:100%;
     font-family:'Spectral',Georgia,serif;
@@ -284,6 +304,12 @@
   }
   .search-input::placeholder{ color:var(--sage); font-style:italic; }
   .search-input:focus-visible{ outline:2px solid var(--calm); outline-offset:1px; border-color:var(--calm); }
+  .search-clear {
+    position: absolute; right: 10px; background: none; border: none;
+    color: var(--sage); font-size: 1.2rem; cursor: pointer; padding: 5px;
+    display: none; line-height: 1;
+  }
+  .search-clear:hover { color: var(--ink); }
   .print-btn{
     font-family:'Fraunces',serif;
     font-size:.8rem;
@@ -299,13 +325,36 @@
     white-space:nowrap;
   }
   .print-btn:hover,
-  .print-btn:focus-visible{ background:var(--ink); border-color:var(--ink); outline:none; }
+  .print-btn:focus-visible{ background:var(--ink); border-color:var(--ink); outline: 2px solid var(--calm); outline-offset: 2px; }
   .no-results{
     max-width:1100px;
     margin:0 auto;
     padding:10px 40px 0;
     color:var(--ink-soft);
     font-style:italic;
+  }
+
+  /* Plant of the Day */
+  #potd-wrap {
+    max-width: 1100px; margin: 20px auto 0; padding: 0 40px;
+  }
+  .potd-card {
+    background: linear-gradient(135deg, var(--sage), var(--calm));
+    border-radius: 12px; padding: 20px; color: #fff;
+    display: flex; align-items: center; gap: 20px;
+    box-shadow: 0 10px 30px var(--shadow-tint);
+    border: 1px solid var(--glass-border);
+  }
+  .potd-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; flex-shrink: 0; }
+  .potd-content h3 { margin: 0 0 5px; font-family: 'Fraunces', serif; font-size: 1.3rem; }
+  .potd-content p { margin: 0; font-size: 0.95rem; opacity: 0.9; }
+  .potd-badge {
+    background: #fff; color: var(--sage); font-family: 'Fraunces', serif;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 10px; border-radius: 999px; margin-bottom: 8px; display: inline-block;
+  }
+  @media (max-width: 640px) {
+    .potd-card { flex-direction: column; text-align: center; }
   }
   .care-swipe-hint{
     display:none;
@@ -389,6 +438,7 @@
     width:100%;
     height:100%;
     color:inherit;
+    cursor: zoom-in;
   }
   .plate .photo-link:focus-visible{
     outline:3px solid var(--mauve);
@@ -460,7 +510,7 @@
     padding:18px 22px;
     background:rgba(255,255,255,.4);
   }
-  .note h3{ font-family:'Fraunces',serif; font-weight:500; margin:0 0 8px; font-size:1.1rem;}
+  .note h2{ font-family:'Fraunces',serif; font-weight:500; margin:0 0 8px; font-size:1.1rem;}
   .note p{ margin:0 0 8px; font-size:.95rem; color:var(--ink-soft);}
   .note p:last-child{ margin-bottom:0; }
 
@@ -501,7 +551,8 @@
   .quick-nav a:focus-visible{
     color:var(--ink);
     border-color:var(--calm);
-    outline:none;
+    outline: 2px solid var(--calm);
+    outline-offset: 2px;
   }
   .spotter{
     margin:0;
@@ -759,60 +810,60 @@
 
   /* ---------- Liquid glass (frosted translucent surfaces) ---------- */
   .quick-nav{
-    background:linear-gradient(180deg, rgba(255,255,255,.60), rgba(255,255,255,.34));
+    background:linear-gradient(180deg, var(--glass-bg), transparent);
     -webkit-backdrop-filter:blur(20px) saturate(180%);
     backdrop-filter:blur(20px) saturate(180%);
-    border-bottom:1px solid rgba(255,255,255,.55);
-    box-shadow:0 10px 30px -18px rgba(35,48,42,.5), inset 0 1px 0 rgba(255,255,255,.75);
+    border-bottom:1px solid var(--glass-border);
+    box-shadow:0 10px 30px -18px var(--shadow-tint), inset 0 1px 0 rgba(255,255,255,0.1);
   }
   .quick-nav a{
-    background:rgba(255,255,255,.42);
+    background:var(--glass-bg);
     -webkit-backdrop-filter:blur(6px);
     backdrop-filter:blur(6px);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
   }
   .search-input{
-    background:linear-gradient(180deg, rgba(255,255,255,.60), rgba(255,255,255,.38));
+    background:var(--glass-bg);
     -webkit-backdrop-filter:blur(16px) saturate(160%);
     backdrop-filter:blur(16px) saturate(160%);
-    border-color:rgba(255,255,255,.6);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 6px 18px -14px rgba(35,48,42,.5);
+    border-color:var(--glass-border);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.05), 0 6px 18px -14px var(--shadow-tint);
   }
   .legend .tag{
-    background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.30));
+    background:var(--glass-bg);
     -webkit-backdrop-filter:blur(10px) saturate(150%);
     backdrop-filter:blur(10px) saturate(150%);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
   }
   .filter-reset{
     -webkit-backdrop-filter:blur(10px) saturate(150%);
     backdrop-filter:blur(10px) saturate(150%);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
   }
   .print-btn{
-    background:linear-gradient(180deg, #97a788, var(--sage));
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 8px 20px -12px rgba(35,48,42,.6);
+    background:linear-gradient(180deg, var(--sage), var(--ink));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 20px -12px var(--shadow-tint);
   }
   /* Frosted plant cards — the photo stays crisp; the text panel becomes glass */
   .card{
-    background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(248,249,244,.36));
+    background:var(--glass-bg);
     -webkit-backdrop-filter:blur(16px) saturate(150%);
     backdrop-filter:blur(16px) saturate(150%);
   }
   .card.danger{
-    background:linear-gradient(180deg, rgba(250,242,240,.62), rgba(247,239,237,.42));
+    background:rgba(154, 70, 54, 0.08);
   }
   /* Soft glass sheen over the masthead */
   .masthead{
-    background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 72%);
+    background:linear-gradient(180deg, var(--glass-bg), transparent 72%);
   }
   .note .box,
   .combo-card{
-    background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(248,249,244,.38));
+    background:var(--glass-bg);
     -webkit-backdrop-filter:blur(18px) saturate(150%);
     backdrop-filter:blur(18px) saturate(150%);
-    border:1px solid rgba(255,255,255,.5);
-    box-shadow:0 20px 44px -28px rgba(35,48,42,.55), inset 0 1px 0 rgba(255,255,255,.6);
+    border:1px solid var(--glass-border);
+    box-shadow:0 20px 44px -28px var(--shadow-tint), inset 0 1px 0 rgba(255,255,255,0.05);
   }
   /* Fallback for browsers without backdrop-filter: keep surfaces readable. */
   @supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
@@ -847,9 +898,9 @@
     border-radius:999px; padding:4px 12px; white-space:nowrap;
     transition:background .2s ease, color .2s ease, border-color .2s ease;
   }
-  .section-select:hover,.section-select:focus-visible{ background:var(--mauve); color:#fff; border-color:var(--mauve); outline:none; }
+  .section-select:hover,.section-select:focus-visible{ background:var(--mauve); color:#fff; border-color:var(--mauve); outline: 2px solid var(--mauve); outline-offset: 2px; }
   .avoid .section-select{ color:var(--warn); }
-  .avoid .section-select:hover,.avoid .section-select:focus-visible{ background:var(--warn); border-color:var(--warn); color:#fff; }
+  .avoid .section-select:hover,.avoid .section-select:focus-visible{ background:var(--warn); border-color:var(--warn); color:#fff; outline: 2px solid var(--warn); outline-offset: 2px; }
 
   .select-dock{
     position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
@@ -864,13 +915,45 @@
   .sd-count{ font-family:'Fraunces',serif; font-size:.9rem; color:var(--ink); white-space:nowrap; }
   .sd-count strong{ font-weight:600; }
   .sd-print,.sd-clear{ font-family:'Fraunces',serif; font-size:.78rem; cursor:pointer; border-radius:999px; padding:8px 15px; white-space:nowrap; }
-  .sd-print{ color:#fff; background:linear-gradient(180deg,#9a86ad,var(--mauve)); border:1px solid var(--mauve); box-shadow:inset 0 1px 0 rgba(255,255,255,.3); }
-  .sd-print:hover,.sd-print:focus-visible{ background:var(--mauve); outline:none; }
+  .sd-print{ color:#fff; background:linear-gradient(180deg,var(--mauve),var(--ink)); border:1px solid var(--mauve); box-shadow:inset 0 1px 0 rgba(255,255,255,0.1); }
+  .sd-print:hover,.sd-print:focus-visible{ background:var(--mauve); outline: 2px solid var(--mauve); outline-offset: 2px; }
   .sd-clear{ color:var(--ink-soft); background:transparent; border:1px solid var(--sage-line); }
-  .sd-clear:hover,.sd-clear:focus-visible{ color:var(--ink); border-color:var(--mauve); outline:none; }
+  .sd-clear:hover,.sd-clear:focus-visible{ color:var(--ink); border-color:var(--mauve); outline: 2px solid var(--mauve); outline-offset: 2px; }
   @media (max-width:560px){
     .select-dock{ left:12px; right:12px; bottom:12px; transform:none; justify-content:center; flex-wrap:wrap; gap:8px; padding:10px 12px; }
   }
+
+  /* Lightbox */
+  #lightbox {
+    position: fixed; z-index: 1000; inset: 0; background: rgba(0,0,0,0.9);
+    display: none; align-items: center; justify-content: center; padding: 40px;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    cursor: zoom-out;
+  }
+  #lightbox.active { display: flex; animation: fadeIn 0.3s ease; }
+  #lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+  #lightbox-close {
+    position: absolute; top: 20px; right: 20px; background: none; border: none;
+    color: #fff; font-size: 3rem; cursor: pointer; line-height: 1; padding: 10px;
+  }
+  #lightbox-caption {
+    position: absolute; bottom: 20px; left: 0; right: 0; text-align: center;
+    color: #fff; font-family: 'Fraunces', serif; font-size: 1.2rem;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* Back to Top */
+  #back-to-top {
+    position: fixed; bottom: 30px; right: 30px; z-index: 100;
+    width: 50px; height: 50px; border-radius: 50%;
+    background: var(--sage); color: #fff; border: none;
+    box-shadow: 0 4px 15px var(--shadow-tint);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; opacity: 0; visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  #back-to-top.visible { opacity: 1; visibility: visible; bottom: 40px; }
+  #back-to-top:hover { transform: scale(1.1); background: var(--ink); }
 
   /* Shopping list — hidden on screen, shown only when printing a selection */
   #shopping-list{ display:none; }
@@ -954,6 +1037,11 @@
     /* Give the big reference sections a clean start on a fresh page */
     #care-guide,#garden-combinations,#photo-credits{ break-before:page; }
     #care-guide .box,#garden-combinations .box,#photo-credits .box{ break-inside:auto; }
+
+    #print-qr { display: block !important; margin: 20px auto; text-align: center; }
+    #potd-wrap { display: none !important; }
+    #print-qr img { width: 150px; height: 150px; }
+    #print-qr p { font-size: 8pt; color: #555; margin-top: 5px; }
   }
   /* Print ONLY the chosen plants as a shopping list. */
   @media print{
@@ -988,7 +1076,24 @@
   </div>
 </header>
 
-<nav class="quick-nav" aria-label="Catalogue sections">
+<div id="potd-wrap" hidden>
+  <div class="potd-card">
+    <img id="potd-img" src="" alt="">
+    <div class="potd-content">
+      <span class="potd-badge">Discovery of the day</span>
+      <h3 id="potd-name"></h3>
+      <p id="potd-benefit"></p>
+      <a href="#" id="potd-link" class="print-btn" style="display:inline-block; margin-top:12px; background:#fff; color:var(--ink); font-size:0.75rem;">View details</a>
+    </div>
+  </div>
+</div>
+
+<div id="print-qr" style="display:none;" aria-hidden="true">
+  <img src="healing_garden_qr.png" alt="QR Code">
+  <p>Scan to view the interactive version</p>
+</div>
+
+<nav id="main-nav" class="quick-nav" aria-label="Catalogue sections">
   <a href="#aromatic">Aromatic</a>
   <a href="#medicinal">Medicinal</a>
   <a href="#birds">Birds</a>
@@ -1002,9 +1107,15 @@
 </nav>
 
 <section class="toolbar" aria-label="Search and print">
+  <div class="theme-toggle-wrap" style="margin-right:auto;">
+    <button type="button" id="theme-toggle" class="print-btn" style="background:var(--card); color:var(--ink); border-color:var(--sage-line);" aria-label="Toggle dark mode">
+      <span id="theme-icon">🌙</span> Dark Mode
+    </button>
+  </div>
   <div class="search-wrap">
     <label class="visually-hidden" for="plant-search">Find a plant by name</label>
     <input type="search" id="plant-search" class="search-input" placeholder="Find a plant by name — e.g. lavender, aloe…" autocomplete="off">
+    <button type="button" id="search-clear" class="search-clear" aria-label="Clear search">&times;</button>
   </div>
   <button type="button" class="print-btn" id="print-btn">Print / Save as PDF</button>
 </section>
@@ -1514,7 +1625,7 @@
 </main>
 <section class="note care-guide" id="care-guide">
   <div class="box">
-    <h3>Watering &amp; Care Guide</h3>
+    <h2>Watering &amp; Care Guide</h2>
     <p>Use this as the garden team's practical maintenance sheet. Adjust watering after rain, during heat waves and while new plants are establishing.</p>
     <div class="care-rule">
       <p><strong>New planting</strong>Water deeply at the root zone for the first 8-12 weeks, then reduce frequency as roots settle.</p>
@@ -1568,14 +1679,14 @@
 </section>
 <section class="note">
   <div class="box">
-    <h3>Using project photographs</h3>
+    <h2>Using project photographs</h2>
     <p>The catalogue now uses reference photographs for every plant. For a final site-specific version, replace these with photographs taken in the actual garden so visitors can recognise the plants exactly as they will see them on the path.</p>
     <p>Keep the file and the <code>healing_garden_images</code> folder together. If you change a photo, keep the same filename or update the matching <code>src</code> value in the card.</p>
   </div>
 </section>
 <section class="note garden-combinations" id="garden-combinations">
   <div class="box">
-    <h3>Suggested Garden Combinations</h3>
+    <h2>Suggested Garden Combinations</h2>
     <p>These photo boards use the actual plant pictures from the catalogue so non-specialists can recognise the look, height layer and planting role of each combination.</p>
     <div class="combo-grid">
       <article class="combo-card">
@@ -1637,7 +1748,7 @@
 </section>
 <section class="note photo-credits" id="photo-credits">
   <div class="box">
-    <h3>Photo credits</h3>
+    <h2>Photo credits</h2>
     <p>Reference photographs are from Wikimedia Commons. Click a plant name to open the source file page and full license details.</p>
     <ol class="credits-list">
       <li><span class="credit-plant"><a href="https://commons.wikimedia.org/wiki/File:Pelargonium_tomentosum_05.jpg" target="_blank" rel="noopener">Peppermint pelargonium</a></span> <em>Pelargonium tomentosum</em>. Photo: Michael Wolf. License: CC BY-SA 3.0.<span class="credit-file">Pelargonium tomentosum 05.jpg</span></li>
@@ -1676,6 +1787,14 @@
   </div>
 </section>
 
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+  <button id="lightbox-close" aria-label="Close lightbox">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
 <div class="select-dock" id="select-dock" role="region" aria-label="Selected plants" hidden>
   <span class="sd-count"><strong id="select-count">0</strong> selected</span>
   <button type="button" class="sd-print" id="print-selection">Print my list</button>
@@ -1705,6 +1824,7 @@
   var status = document.getElementById('filter-status');
   var resetBtn = document.getElementById('filter-reset');
   var searchInput = document.getElementById('plant-search');
+  var searchClear = document.getElementById('search-clear');
   var printBtn = document.getElementById('print-btn');
   var noResults = document.getElementById('no-results');
   if(!buttons.length || !cards.length) return;
@@ -1747,6 +1867,7 @@
     });
 
     var q = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
+    if (searchClear) searchClear.style.display = q ? 'block' : 'none';
     var shown = 0;
 
     cards.forEach(function(card){
@@ -1786,6 +1907,13 @@
     });
   });
   if(searchInput){ searchInput.addEventListener('input', apply); }
+  if(searchClear){
+    searchClear.addEventListener('click', function(){
+      searchInput.value = '';
+      apply();
+      searchInput.focus();
+    });
+  }
   resetBtn.addEventListener('click', function(){
     buttons.forEach(function(b){ b.setAttribute('aria-pressed', 'false'); });
     if(searchInput){ searchInput.value = ''; searchInput.focus(); }
@@ -1962,6 +2090,114 @@
   });
 
   update();
+})();
+
+// Dark Mode Toggle
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  var icon = document.getElementById('theme-icon');
+  if(!btn) return;
+
+  function setTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    btn.innerHTML = (dark ? '☀️ Light Mode' : '🌙 Dark Mode');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if(saved === 'dark' || (!saved && prefersDark)) {
+    setTheme(true);
+  }
+
+  btn.addEventListener('click', function(){
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    setTheme(!isDark);
+  });
+})();
+
+// Lightbox
+(function(){
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var lbCap = document.getElementById('lightbox-caption');
+  var close = document.getElementById('lightbox-close');
+  if(!lightbox || !lbImg) return;
+
+  document.querySelectorAll('.plate .photo-link').forEach(function(link){
+    link.addEventListener('click', function(e){
+      // Only lightbox if not clicking a source link (if we had specific buttons, but we're using the whole plate)
+      // Actually, let's make the image itself clickable or add a button.
+      // Current design has the whole image as a link to Wikimedia.
+      // Let's override for lightbox and add a small 'source' icon later.
+      e.preventDefault();
+      var img = link.querySelector('img');
+      var card = link.closest('.card');
+      var name = card ? card.querySelector('.common').textContent : '';
+      lbImg.src = img.src;
+      lbCap.textContent = name;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function hide() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  lightbox.addEventListener('click', hide);
+  close.addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') hide();
+  });
+})();
+
+// Back to Top
+(function(){
+  var btn = document.getElementById('back-to-top');
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 500) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+// Plant of the Day
+(function(){
+  var wrap = document.getElementById('potd-wrap');
+  var img = document.getElementById('potd-img');
+  var nameEl = document.getElementById('potd-name');
+  var benefitEl = document.getElementById('potd-benefit');
+  var link = document.getElementById('potd-link');
+  var cards = document.querySelectorAll('main .card:not(.danger)');
+  if(!wrap || cards.length === 0) return;
+
+  // Use a simple hash of the date to pick a consistent plant for the day
+  var today = new Date().toISOString().slice(0, 10);
+  var hash = 0;
+  for (var i = 0; i < today.length; i++) {
+    hash = ((hash << 5) - hash) + today.charCodeAt(i);
+    hash |= 0;
+  }
+  var idx = Math.abs(hash) % cards.length;
+  var card = cards[idx];
+
+  img.src = card.querySelector('.plate img').src;
+  nameEl.textContent = card.querySelector('.common').textContent;
+  benefitEl.textContent = card.querySelector('.benefit').textContent;
+
+  // Create a unique ID if it doesn't have one, or use the card's position
+  if(!card.id) card.id = 'plant-' + idx;
+  link.href = '#' + card.id;
+
+  wrap.hidden = false;
 })();
 </script>
 

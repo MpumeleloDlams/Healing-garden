@@ -12,7 +12,7 @@ photo credits.
 Open `index.html` in any modern browser, or view the hosted version once
 GitHub Pages is enabled (Settings → Pages → Deploy from branch → `main` / root).
 
-- `index.html` — the interactive catalogue
+- `index.html` — the interactive catalogue (now with Dark Mode, Lightbox, and Advanced Search)
 - `healing_garden_images/` — plant photographs
 - `garden_combination_images/` — planting-combination boards
 - `Healing_Garden_Plant_Catalogue.pdf` — printable / navigable PDF version

@@ -273,6 +273,15 @@
   }
   .print-btn:hover,
   .print-btn:focus-visible{ background:var(--ink); border-color:var(--ink); outline:none; }
+  .print-btn.download-btn{
+    background:var(--calm);
+    border-color:var(--calm);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+  }
+  .print-btn.download-btn:hover,
+  .print-btn.download-btn:focus-visible{ background:var(--ink); border-color:var(--ink); outline:none; }
   .no-results{
     max-width:1100px;
     margin:0 auto;
@@ -979,7 +988,8 @@
     <label class="visually-hidden" for="plant-search">Find a plant by name</label>
     <input type="search" id="plant-search" class="search-input" placeholder="Find a plant by name — e.g. lavender, aloe…" autocomplete="off">
   </div>
-  <button type="button" class="print-btn" id="print-btn">Print / Save as PDF</button>
+  <a class="print-btn download-btn" href="Healing_Garden_Plant_Catalogue.pdf" download="Healing_Garden_Plant_Catalogue.pdf">Download PDF</a>
+  <button type="button" class="print-btn" id="print-btn">Print this page</button>
 </section>
 
 <section class="legend" aria-label="Filter plants by benefit">

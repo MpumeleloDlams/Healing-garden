@@ -145,8 +145,18 @@
     margin:0 auto;
     padding:22px 40px 8px;
     display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .filter-group{
+    display:flex;
     flex-wrap:wrap;
     gap:8px 10px;
+    align-items:center;
+  }
+  .filter-controls{
+    display:flex;
+    gap:12px;
     align-items:center;
   }
   .legend .legend-label{
@@ -540,13 +550,13 @@
   }
 
   /* Gentle crop tuning for tall or close-up source images. */
-  .plate img[src$="nerium-oleander.jpg"]{ object-position:center 30%; }
-  .plate img[src$="brugmansia-datura.jpg"]{ object-position:center 38%; }
-  .plate img[src$="eriocephalus-africanus.jpg"]{ object-position:center 44%; }
-  .plate img[src$="barleria-obtusa.jpg"]{ object-position:center 42%; }
-  .plate img[src$="agapanthus-praecox.jpg"]{ object-position:center 40%; }
-  .plate img[src$="buddleja-salviifolia.jpg"]{ object-position:center 42%; }
-  .plate img[src$="pelargonium-tomentosum.jpg"]{ object-position:center 44%; }
+  .plate img[src$="nerium-oleander.webp"]{ object-position:center 30%; }
+  .plate img[src$="brugmansia-datura.webp"]{ object-position:center 38%; }
+  .plate img[src$="eriocephalus-africanus.webp"]{ object-position:center 44%; }
+  .plate img[src$="barleria-obtusa.webp"]{ object-position:center 42%; }
+  .plate img[src$="agapanthus-praecox.webp"]{ object-position:center 40%; }
+  .plate img[src$="buddleja-salviifolia.webp"]{ object-position:center 42%; }
+  .plate img[src$="pelargonium-tomentosum.webp"]{ object-position:center 44%; }
 
   /* ---------- Care notes ---------- */
   .care{
@@ -962,7 +972,7 @@
 <body>
 
 <header class="hero">
-  <img class="hero-img" src="healing_garden_images/aloe-arborescens.jpg" alt="" aria-hidden="true" decoding="async">
+  <img class="hero-img" src="healing_garden_images/aloe-arborescens.webp" alt="" aria-hidden="true" decoding="async">
   <div class="hero-inner">
     <div class="hero-panel">
       <p class="eyebrow">A therapeutic walking garden · plant benefit catalogue</p>
@@ -996,18 +1006,36 @@
 </section>
 
 <section class="legend" aria-label="Filter plants by benefit">
-  <span class="legend-label">Filter by benefit</span>
-  <button type="button" class="tag scent" data-filter="scent" aria-pressed="false">Scent / aromatherapy</button>
-  <button type="button" class="tag colour" data-filter="colour" aria-pressed="false">Calming colour</button>
-  <button type="button" class="tag movement" data-filter="movement" aria-pressed="false">Movement &amp; sound</button>
-  <button type="button" class="tag touch" data-filter="touch" aria-pressed="false">Touch</button>
-  <button type="button" class="tag taste" data-filter="taste" aria-pressed="false">Labelled edible part</button>
-  <button type="button" class="tag birds" data-filter="birds" aria-pressed="false">Attracts birds</button>
-  <button type="button" class="tag butterfly" data-filter="butterfly" aria-pressed="false">Attracts butterflies</button>
-  <button type="button" class="tag medicinal" data-filter="medicinal" aria-pressed="false">Medicinal heritage</button>
-  <button type="button" class="tag shade" data-filter="shade" aria-pressed="false">Shade / shelter</button>
-  <button type="button" class="filter-reset" id="filter-reset" hidden>Show all</button>
-  <span class="filter-status" id="filter-status" role="status" aria-live="polite"></span>
+  <div class="filter-group">
+    <span class="legend-label">Filter by benefit</span>
+    <button type="button" class="tag scent" data-filter="scent" aria-pressed="false">Scent / aromatherapy</button>
+    <button type="button" class="tag colour" data-filter="colour" aria-pressed="false">Calming colour</button>
+    <button type="button" class="tag movement" data-filter="movement" aria-pressed="false">Movement &amp; sound</button>
+    <button type="button" class="tag touch" data-filter="touch" aria-pressed="false">Touch</button>
+    <button type="button" class="tag taste" data-filter="taste" aria-pressed="false">Labelled edible part</button>
+    <button type="button" class="tag birds" data-filter="birds" aria-pressed="false">Attracts birds</button>
+    <button type="button" class="tag butterfly" data-filter="butterfly" aria-pressed="false">Attracts butterflies</button>
+    <button type="button" class="tag medicinal" data-filter="medicinal" aria-pressed="false">Medicinal heritage</button>
+    <button type="button" class="tag shade" data-filter="shade" aria-pressed="false">Shade / shelter</button>
+  </div>
+
+  <div class="filter-group">
+    <span class="legend-label">Light Requirements</span>
+    <button type="button" class="tag" data-filter-light="sun" aria-pressed="false">Full Sun</button>
+    <button type="button" class="tag" data-filter-light="partial-shade" aria-pressed="false">Partial Shade</button>
+    <button type="button" class="tag" data-filter-light="shade" aria-pressed="false">Shade</button>
+  </div>
+
+  <div class="filter-group">
+    <span class="legend-label">Watering Needs</span>
+    <button type="button" class="tag" data-filter-water="low" aria-pressed="false">Low Water</button>
+    <button type="button" class="tag" data-filter-water="moderate" aria-pressed="false">Moderate Water</button>
+  </div>
+
+  <div class="filter-controls">
+    <button type="button" class="filter-reset" id="filter-reset" hidden>Show all</button>
+    <span class="filter-status" id="filter-status" role="status" aria-live="polite"></span>
+  </div>
 </section>
 <p class="filter-hint">Tap one or more benefits to show only the plants that offer them. Tap again to clear, or use “Show all”.</p>
 <p class="no-results" id="no-results" role="status" aria-live="polite" hidden>No plants match that search. Try a different name, or use “Show all” to reset.</p>
@@ -1023,8 +1051,8 @@
     </div>
     <div class="grid">
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Pelargonium_tomentosum_05.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/pelargonium-tomentosum.jpg" alt="Peppermint pelargonium (Pelargonium tomentosum)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Pelargonium tomentosum</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="partial-shade" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Pelargonium_tomentosum_05.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/pelargonium-tomentosum.webp" alt="Peppermint pelargonium (Pelargonium tomentosum)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Pelargonium tomentosum</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Peppermint pelargonium</h3>
           <p class="botanical">Pelargonium tomentosum</p>
@@ -1035,8 +1063,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:African_Rosemary.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/eriocephalus-africanus.jpg" alt="Wild rosemary (Eriocephalus africanus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Eriocephalus africanus</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:African_Rosemary.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/eriocephalus-africanus.webp" alt="Wild rosemary (Eriocephalus africanus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Eriocephalus africanus</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Wild rosemary</h3>
           <p class="botanical">Eriocephalus africanus</p>
@@ -1047,8 +1075,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Heteropyxis_natalensis01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/heteropyxis-natalensis.jpg" alt="Lavender tree (Heteropyxis natalensis)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Heteropyxis natalensis</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Heteropyxis_natalensis01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/heteropyxis-natalensis.webp" alt="Lavender tree (Heteropyxis natalensis)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Heteropyxis natalensis</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Heteropyxis / Lavender tree</h3>
           <p class="botanical">Heteropyxis natalensis</p>
@@ -1059,8 +1087,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Jasminum_multipartitum_5Dsr_1-2066.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/jasminum-multipartitum.jpg" alt="Wild jasmine (Jasminum multipartitum)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Jasminum multipartitum</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="partial-shade" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Jasminum_multipartitum_5Dsr_1-2066.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/jasminum-multipartitum.webp" alt="Wild jasmine (Jasminum multipartitum)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Jasminum multipartitum</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Wild jasmine</h3>
           <p class="botanical">Jasminum multipartitum</p>
@@ -1071,8 +1099,8 @@
         </div>
       </article>
 
-      <article class="card extra-plant">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Pelargonium_%C3%97_hortorum_mixed.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC0)"><img src="healing_garden_images/garden-geranium.jpg" alt="Garden geranium (Pelargonium x hortorum / Pelargonium hybrids)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Pelargonium hortorum</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Pelargonium_%C3%97_hortorum_mixed.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC0)"><img src="healing_garden_images/garden-geranium.webp" alt="Garden geranium (Pelargonium x hortorum / Pelargonium hybrids)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Pelargonium hortorum</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Garden geranium</h3>
           <p class="botanical">Pelargonium x hortorum / Pelargonium hybrids</p>
@@ -1083,8 +1111,8 @@
         </div>
       </article>
 
-      <article class="card extra-plant">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_-_lavender_-_Lavendel_-_01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/lavender.jpg" alt="Lavender (Lavandula angustifolia)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Lavandula angustifolia</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_-_lavender_-_Lavendel_-_01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/lavender.webp" alt="Lavender (Lavandula angustifolia)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Lavandula angustifolia</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Lavender</h3>
           <p class="botanical">Lavandula angustifolia</p>
@@ -1095,8 +1123,8 @@
         </div>
       </article>
 
-      <article class="card extra-plant">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Basil-Basilico-Ocimum_basilicum-albahaca.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/basil.jpg" alt="Basil (Ocimum basilicum / Ocimum spp.)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Ocimum basilicum</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Basil-Basilico-Ocimum_basilicum-albahaca.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/basil.webp" alt="Basil (Ocimum basilicum / Ocimum spp.)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Ocimum basilicum</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Basil</h3>
           <p class="botanical">Ocimum basilicum / Ocimum spp.</p>
@@ -1107,8 +1135,8 @@
         </div>
       </article>
 
-      <article class="card extra-plant">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:YosriNov04Pokok_Serai.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.0)"><img src="healing_garden_images/lemongrass.jpg" alt="Lemongrass (Cymbopogon citratus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Cymbopogon citratus</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:YosriNov04Pokok_Serai.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.0)"><img src="healing_garden_images/lemongrass.webp" alt="Lemongrass (Cymbopogon citratus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Cymbopogon citratus</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Lemongrass</h3>
           <p class="botanical">Cymbopogon citratus</p>
@@ -1119,8 +1147,8 @@
         </div>
       </article>
 
-      <article class="card extra-plant">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Leaves_of_Aloysia_citrodora.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/lemon-verbena.jpg" alt="Lemon verbena (Aloysia citrodora)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Aloysia citrodora</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Leaves_of_Aloysia_citrodora.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/lemon-verbena.webp" alt="Lemon verbena (Aloysia citrodora)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Aloysia citrodora</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Lemon verbena</h3>
           <p class="botanical">Aloysia citrodora</p>
@@ -1131,8 +1159,8 @@
         </div>
       </article>
 
-      <article class="card extra-plant">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Gardenia_jasminoides_flower.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/gardenia.jpg" alt="Gardenia (Gardenia jasminoides)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Gardenia jasminoides</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="partial-shade" data-water="moderate" class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Gardenia_jasminoides_flower.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/gardenia.webp" alt="Gardenia (Gardenia jasminoides)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Gardenia jasminoides</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Gardenia</h3>
           <p class="botanical">Gardenia jasminoides</p>
@@ -1143,8 +1171,8 @@
         </div>
       </article>
 
-      <article class="card extra-plant">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Thymian_(Thymus_vulgaris),_Nationalpark_Hohe_Tauern.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 4.0)"><img src="healing_garden_images/thyme.jpg" alt="Thyme (Thymus vulgaris)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Thymus vulgaris</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card extra-plant">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Thymian_(Thymus_vulgaris),_Nationalpark_Hohe_Tauern.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 4.0)"><img src="healing_garden_images/thyme.webp" alt="Thyme (Thymus vulgaris)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Thymus vulgaris</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Thyme</h3>
           <p class="botanical">Thymus vulgaris</p>
@@ -1166,8 +1194,8 @@
     </div>
     <div class="grid">
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Artemisia_afra_07102003_Afrique_du_sud.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/artemisia-afra.jpg" alt="African wormwood (Artemisia afra)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Artemisia afra</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Artemisia_afra_07102003_Afrique_du_sud.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/artemisia-afra.webp" alt="African wormwood (Artemisia afra)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Artemisia afra</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">African wormwood</h3>
           <p class="botanical">Artemisia afra</p>
@@ -1179,8 +1207,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Tulbaghia_(Society_Garlic).jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/tulbaghia-violacea.jpg" alt="Wild garlic (Tulbaghia violacea)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Tulbaghia violacea</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Tulbaghia_(Society_Garlic).jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/tulbaghia-violacea.webp" alt="Wild garlic (Tulbaghia violacea)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Tulbaghia violacea</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Wild garlic</h3>
           <p class="botanical">Tulbaghia violacea</p>
@@ -1192,8 +1220,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bulbine_frutescens_2.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/bulbine-frutescens.jpg" alt="Bulbine (Bulbine frutescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Bulbine frutescens</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bulbine_frutescens_2.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/bulbine-frutescens.webp" alt="Bulbine (Bulbine frutescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Bulbine frutescens</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Bulbine</h3>
           <p class="botanical">Bulbine frutescens</p>
@@ -1204,8 +1232,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:2018-08-05_Sutherlandia_frutescens.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/lessertia-frutescens.jpg" alt="Cancer bush (Sutherlandia / Lessertia frutescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Lessertia frutescens</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:2018-08-05_Sutherlandia_frutescens.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/lessertia-frutescens.webp" alt="Cancer bush (Sutherlandia / Lessertia frutescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Lessertia frutescens</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Cancer bush</h3>
           <p class="botanical">Sutherlandia / Lessertia frutescens</p>
@@ -1216,8 +1244,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Aloe_arborescens_-_Candelabra_aloe_01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/aloe-arborescens.jpg" alt="Krantz aloe (Aloe arborescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Aloe arborescens</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Aloe_arborescens_-_Candelabra_aloe_01.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/aloe-arborescens.webp" alt="Krantz aloe (Aloe arborescens)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Aloe arborescens</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Krantz aloe</h3>
           <p class="botanical">Aloe arborescens</p>
@@ -1240,8 +1268,8 @@
     </div>
     <div class="grid">
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Tecoma_capensis_3.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/tecoma-capensis.jpg" alt="Cape honeysuckle (Tecoma capensis)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Tecoma capensis</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Tecoma_capensis_3.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/tecoma-capensis.webp" alt="Cape honeysuckle (Tecoma capensis)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Tecoma capensis</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Cape honeysuckle</h3>
           <p class="botanical">Tecoma capensis</p>
@@ -1252,8 +1280,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Leonotis_leonorus10.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/leonotis-leonurus.jpg" alt="Wild dagga (Leonotis leonurus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Leonotis leonurus</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Leonotis_leonorus10.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/leonotis-leonurus.webp" alt="Wild dagga (Leonotis leonurus)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Leonotis leonurus</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Wild dagga</h3>
           <p class="botanical">Leonotis leonurus</p>
@@ -1264,8 +1292,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Halleria_lucida_3.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/halleria-lucida.jpg" alt="Tree fuchsia (Halleria lucida)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Halleria lucida</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="partial-shade" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Halleria_lucida_3.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/halleria-lucida.webp" alt="Tree fuchsia (Halleria lucida)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Halleria lucida</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Tree fuchsia</h3>
           <p class="botanical">Halleria lucida</p>
@@ -1276,8 +1304,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bird_of_Paradise_flower.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/strelitzia-reginae.jpg" alt="Crane flower (Strelitzia reginae)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Strelitzia reginae</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bird_of_Paradise_flower.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/strelitzia-reginae.webp" alt="Crane flower (Strelitzia reginae)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Strelitzia reginae</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Crane flower</h3>
           <p class="botanical">Strelitzia reginae</p>
@@ -1288,8 +1316,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Starr_010820-0009_Carissa_macrocarpa.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 3.0)"><img src="healing_garden_images/carissa-macrocarpa.jpg" alt="Num-num (Carissa macrocarpa)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Carissa macrocarpa</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Starr_010820-0009_Carissa_macrocarpa.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 3.0)"><img src="healing_garden_images/carissa-macrocarpa.webp" alt="Num-num (Carissa macrocarpa)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Carissa macrocarpa</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Num-num</h3>
           <p class="botanical">Carissa macrocarpa</p>
@@ -1312,8 +1340,8 @@
     </div>
     <div class="grid">
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Kiggelaria_africana_1DS-II_3742.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/kiggelaria-africana.jpg" alt="Wild peach (Kiggelaria africana)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Kiggelaria africana</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Kiggelaria_africana_1DS-II_3742.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/kiggelaria-africana.webp" alt="Wild peach (Kiggelaria africana)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Kiggelaria africana</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Wild peach</h3>
           <p class="botanical">Kiggelaria africana</p>
@@ -1324,8 +1352,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Buddleja_salvifolia.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/buddleja-salviifolia.jpg" alt="Sagewood (Buddleja salviifolia)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Buddleja salviifolia</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Buddleja_salvifolia.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/buddleja-salviifolia.webp" alt="Sagewood (Buddleja salviifolia)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Buddleja salviifolia</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Sagewood</h3>
           <p class="botanical">Buddleja salviifolia</p>
@@ -1336,8 +1364,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Barleria_obtusa_1DS-II_4-3309.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/barleria-obtusa.jpg" alt="Bush violet (Barleria obtusa)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Barleria obtusa</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Barleria_obtusa_1DS-II_4-3309.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 4.0)"><img src="healing_garden_images/barleria-obtusa.webp" alt="Bush violet (Barleria obtusa)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Barleria obtusa</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Bush violet</h3>
           <p class="botanical">Barleria obtusa</p>
@@ -1348,8 +1376,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Blue_flowers01.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/plumbago-auriculata.jpg" alt="Plumbago (Plumbago auriculata)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Plumbago auriculata</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Blue_flowers01.JPG" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/plumbago-auriculata.webp" alt="Plumbago (Plumbago auriculata)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Plumbago auriculata</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Plumbago</h3>
           <p class="botanical">Plumbago auriculata</p>
@@ -1372,8 +1400,8 @@
     </div>
     <div class="grid">
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:BCBG_Agapanthus_Praecox_04.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0 au)"><img src="healing_garden_images/agapanthus-praecox.jpg" alt="Agapanthus (Agapanthus praecox)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Agapanthus praecox</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:BCBG_Agapanthus_Praecox_04.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0 au)"><img src="healing_garden_images/agapanthus-praecox.webp" alt="Agapanthus (Agapanthus praecox)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Agapanthus praecox</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Agapanthus</h3>
           <p class="botanical">Agapanthus praecox</p>
@@ -1384,8 +1412,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Dietes_grandiflora_or_Fairy_Iris.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.0)"><img src="healing_garden_images/dietes-grandiflora.jpg" alt="Wild iris (Dietes grandiflora)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Dietes grandiflora</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Dietes_grandiflora_or_Fairy_Iris.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.0)"><img src="healing_garden_images/dietes-grandiflora.webp" alt="Wild iris (Dietes grandiflora)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Dietes grandiflora</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Wild iris</h3>
           <p class="botanical">Dietes grandiflora</p>
@@ -1396,8 +1424,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bush_Lily_(Clivia_miniata)_(32603733520).jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 2.0)"><img src="healing_garden_images/clivia-miniata.jpg" alt="Clivia (Clivia miniata)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Clivia miniata</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="shade" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Bush_Lily_(Clivia_miniata)_(32603733520).jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 2.0)"><img src="healing_garden_images/clivia-miniata.webp" alt="Clivia (Clivia miniata)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Clivia miniata</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Clivia</h3>
           <p class="botanical">Clivia miniata</p>
@@ -1408,8 +1436,8 @@
         </div>
       </article>
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Themeda_triandra_-_kangaroo_grass.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/themeda-triandra.jpg" alt="Red grass (Themeda triandra)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Themeda triandra</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Themeda_triandra_-_kangaroo_grass.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/themeda-triandra.webp" alt="Red grass (Themeda triandra)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Themeda triandra</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Red grass</h3>
           <p class="botanical">Themeda triandra</p>
@@ -1432,8 +1460,8 @@
     </div>
     <div class="grid">
 
-      <article class="card">
-        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Calodendrum_capense.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.5)"><img src="healing_garden_images/calodendrum-capense.jpg" alt="Cape chestnut (Calodendrum capense)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Calodendrum capense</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card">
+        <div class="plate"><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Calodendrum_capense.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY 2.5)"><img src="healing_garden_images/calodendrum-capense.webp" alt="Cape chestnut (Calodendrum capense)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">❧</span><span class="phname">Calodendrum capense</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Cape chestnut</h3>
           <p class="botanical">Calodendrum capense</p>
@@ -1456,8 +1484,8 @@
     </div>
     <div class="grid">
 
-      <article class="card danger">
-        <div class="plate"><span class="skull">Toxic</span><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Dettaglio_-_Apocinaceae_Nerium_oleander_Lin._Erbario_Frizzi_Perugia_n._270.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/nerium-oleander.jpg" alt="Oleander (Nerium oleander)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">⚠</span><span class="phname">Nerium oleander</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="low" class="card danger">
+        <div class="plate"><span class="skull">Toxic</span><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Dettaglio_-_Apocinaceae_Nerium_oleander_Lin._Erbario_Frizzi_Perugia_n._270.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (Public domain)"><img src="healing_garden_images/nerium-oleander.webp" alt="Oleander (Nerium oleander)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">⚠</span><span class="phname">Nerium oleander</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Oleander</h3>
           <p class="botanical">Nerium oleander</p>
@@ -1468,8 +1496,8 @@
         </div>
       </article>
 
-      <article class="card danger">
-        <div class="plate"><span class="skull">Toxic</span><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Brugmansia.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/brugmansia-datura.jpg" alt="Angel&#39;s trumpet (Brugmansia / Datura spp.)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">⚠</span><span class="phname">Brugmansia / Datura</span><span class="phnote">photo unavailable</span></div></div>
+      <article data-light="sun" data-water="moderate" class="card danger">
+        <div class="plate"><span class="skull">Toxic</span><a class="photo-link" href="https://commons.wikimedia.org/wiki/File:Brugmansia.jpg" target="_blank" rel="noopener" title="Photo source: Wikimedia Commons (CC BY-SA 3.0)"><img src="healing_garden_images/brugmansia-datura.webp" alt="Angel&#39;s trumpet (Brugmansia / Datura spp.)" loading="lazy" decoding="async" onerror="this.closest('.photo-link').style.display='none'; this.closest('.plate').querySelector('.ph').hidden=false;"></a><div class="ph" hidden><span class="leaf">⚠</span><span class="phname">Brugmansia / Datura</span><span class="phnote">photo unavailable</span></div></div>
         <div class="card-body">
           <h3 class="common">Angel's trumpet</h3>
           <p class="botanical">Brugmansia / Datura spp.</p>
@@ -1551,7 +1579,7 @@
     <p>These photo boards use the actual plant pictures from the catalogue so non-specialists can recognise the look, height layer and planting role of each combination.</p>
     <div class="combo-grid">
       <article class="combo-card">
-        <img src="garden_combination_images/dry-sunny-aromatic.png" alt="Dry Sunny Aromatic Bed photo-based planting combination" loading="lazy" decoding="async">
+        <img src="garden_combination_images/dry-sunny-aromatic.webp" alt="Dry Sunny Aromatic Bed photo-based planting combination" loading="lazy" decoding="async">
         <div class="combo-body">
           <h4>Dry Sunny Aromatic Bed</h4>
           <p>Low-water, full-sun planting with silver foliage, herbs and warm flower accents.</p>
@@ -1560,7 +1588,7 @@
         </div>
       </article>
       <article class="combo-card">
-        <img src="garden_combination_images/lemon-tea-sensory.png" alt="Lemon &amp; Tea Sensory Bed photo-based planting combination" loading="lazy" decoding="async">
+        <img src="garden_combination_images/lemon-tea-sensory.webp" alt="Lemon &amp; Tea Sensory Bed photo-based planting combination" loading="lazy" decoding="async">
         <div class="combo-body">
           <h4>Lemon &amp; Tea Sensory Bed</h4>
           <p>A fragrant path-side bed for touch, scent and supervised culinary interpretation.</p>
@@ -1569,7 +1597,7 @@
         </div>
       </article>
       <article class="combo-card">
-        <img src="garden_combination_images/fragrant-flower.png" alt="Fragrant Flower Entrance Bed photo-based planting combination" loading="lazy" decoding="async">
+        <img src="garden_combination_images/fragrant-flower.webp" alt="Fragrant Flower Entrance Bed photo-based planting combination" loading="lazy" decoding="async">
         <div class="combo-body">
           <h4>Fragrant Flower Entrance Bed</h4>
           <p>Perfumed shrubs and soft flowers for benches, entries and slow walking moments.</p>
@@ -1578,7 +1606,7 @@
         </div>
       </article>
       <article class="combo-card">
-        <img src="garden_combination_images/bird-sunbird.png" alt="Bird &amp; Sunbird Bed photo-based planting combination" loading="lazy" decoding="async">
+        <img src="garden_combination_images/bird-sunbird.webp" alt="Bird &amp; Sunbird Bed photo-based planting combination" loading="lazy" decoding="async">
         <div class="combo-body">
           <h4>Bird &amp; Sunbird Bed</h4>
           <p>Nectar, fruit, height and movement to bring life close to the walkway.</p>
@@ -1587,7 +1615,7 @@
         </div>
       </article>
       <article class="combo-card">
-        <img src="garden_combination_images/butterfly-pollinator.png" alt="Butterfly &amp; Pollinator Bed photo-based planting combination" loading="lazy" decoding="async">
+        <img src="garden_combination_images/butterfly-pollinator.webp" alt="Butterfly &amp; Pollinator Bed photo-based planting combination" loading="lazy" decoding="async">
         <div class="combo-body">
           <h4>Butterfly &amp; Pollinator Bed</h4>
           <p>Layered flowers for bees, butterflies and soft fascination.</p>
@@ -1596,7 +1624,7 @@
         </div>
       </article>
       <article class="combo-card">
-        <img src="garden_combination_images/shade-resting.png" alt="Shade &amp; Resting Bed photo-based planting combination" loading="lazy" decoding="async">
+        <img src="garden_combination_images/shade-resting.webp" alt="Shade &amp; Resting Bed photo-based planting combination" loading="lazy" decoding="async">
         <div class="combo-body">
           <h4>Shade &amp; Resting Bed</h4>
           <p>A calm seating garden with dappled shade, white flowers and glossy foliage.</p>
@@ -1683,13 +1711,16 @@
   if(!buttons.length || !cards.length) return;
   var total = cards.length;
 
-  // Record each card's benefit tags and its searchable text (common, botanical, isiZulu names).
+  // Record each card's metadata and searchable text.
   cards.forEach(function(card){
     var set = {};
     Array.prototype.forEach.call(card.querySelectorAll('.card-tags .tag'), function(t){
       Array.prototype.forEach.call(t.classList, function(c){ if(c !== 'tag'){ set[c] = true; } });
     });
     card._tags = set;
+    card._light = card.getAttribute('data-light');
+    card._water = card.getAttribute('data-water');
+
     var parts = [];
     ['.common', '.botanical', '.zulu'].forEach(function(sel){
       var el = card.querySelector(sel);
@@ -1698,26 +1729,34 @@
     card._text = parts.join(' ').toLowerCase();
   });
 
-  function active(){
-    return buttons.filter(function(b){ return b.getAttribute('aria-pressed') === 'true'; })
-                  .map(function(b){ return b.getAttribute('data-filter'); });
+  function getActive(attr){
+    return buttons.filter(function(b){
+      return b.getAttribute('aria-pressed') === 'true' && b.hasAttribute(attr);
+    }).map(function(b){ return b.getAttribute(attr); });
   }
 
   function apply(){
-    var on = active();
+    var onBenefit = getActive('data-filter');
+    var onLight = getActive('data-filter-light');
+    var onWater = getActive('data-filter-water');
+
     var q = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
     var shown = 0;
+
     cards.forEach(function(card){
-      var benefitMatch = on.length === 0 || on.some(function(f){ return card._tags[f]; });
+      var benefitMatch = onBenefit.length === 0 || onBenefit.some(function(f){ return card._tags[f]; });
+      var lightMatch = onLight.length === 0 || onLight.indexOf(card._light) !== -1;
+      var waterMatch = onWater.length === 0 || onWater.indexOf(card._water) !== -1;
       var searchMatch = q === '' || card._text.indexOf(q) !== -1;
-      var match = benefitMatch && searchMatch;
+
+      var match = benefitMatch && lightMatch && waterMatch && searchMatch;
       card.classList.toggle('filtered-out', !match);
       if(match){ shown++; }
     });
     sections.forEach(function(sec){
       sec.classList.toggle('filtered-out', !sec.querySelector('.card:not(.filtered-out)'));
     });
-    var filtering = on.length > 0 || q !== '';
+    var filtering = onBenefit.length > 0 || onLight.length > 0 || onWater.length > 0 || q !== '';
     if(noResults){ noResults.hidden = !(filtering && shown === 0); }
     if(!filtering){
       status.textContent = '';
